@@ -1,0 +1,33 @@
+#########################################
+# The "production" compose file builds
+# on your EC2 instance
+#########################################
+
+version: "3"
+services:
+  api:
+    image: $DOCKERHUB_UNAME/backend-prod:$NEW_VERSION
+    environment:
+      - SECRET_KEY=$SECRET_KEY
+      - DEBUG=$DEBUG
+      - DB_NAME=$POSTGRES_DB
+      - DB_USER=$POSTGRES_USER
+      - DB_PASS=$POSTGRES_PASSWORD
+    depends_on:
+      - db
+  nginx:
+    image: $DOCKERHUB_UNAME/webserver-prod:$NEW_VERSION
+    restart: always
+    ports:
+      - "80:80"
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+
+volumes:
+  postgres_data:
