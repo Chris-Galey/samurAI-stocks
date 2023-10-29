@@ -13,5 +13,5 @@ docker-compose -f docker-compose.dev.yml up -d --build
 sleep 10
 
 # You have to change the container names
-docker exec samurAI-stocks_api_1  python /src/manage.py makemigrations 
-docker exec samurAI-stocks_api_1  python /src/manage.py migrate
+docker exec samurai_stocks_api_1  python /src/manage.py makemigrations 
+docker exec samurai_stocks_api_1  python /src/manage.py migrate
