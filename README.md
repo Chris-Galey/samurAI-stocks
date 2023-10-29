@@ -1,7 +1,8 @@
 # samurAI-stocks
+
 SamurAI Stocks is a cutting-edge stock analysis application that empowers both novice and experienced investors with comprehensive tools and insights to make informed investment decisions. Combining the precision of artificial intelligence with the wisdom of a seasoned samurai, this platform is your key to mastering the stock market.
 
-## Key Features
+## Key Features:
 
 ### Advanced AI-Powered Analysis
 
@@ -48,7 +49,6 @@ Access tutorials, articles, and expert insights to enhance your investment knowl
 Connect with a community of fellow investors, exchange ideas, and share your strategies.
 Follow top traders and learn from their success.
 Security and Privacy:
-
 
 Rest easy with robust security measures to protect your financial data and personal information.
 Encryption and multi-factor authentication ensure your account's safety.
