@@ -3,7 +3,7 @@
 # These environment variables are consumed by the docker-compose file.
 export SECRET_KEY=abc123
 export DEBUG=True
-export POSTGRES_DB=wines
+export POSTGRES_DB=stocks
 export POSTGRES_USER=postgres
 export POSTGRES_PASSWORD=postgres
 
