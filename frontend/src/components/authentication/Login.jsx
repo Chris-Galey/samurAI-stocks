@@ -12,7 +12,7 @@ export default function Login() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const data = await login(username, password);
-    console.log(data.token);
+
     if (data.token !== undefined) {
       localStorage.setItem("token", data.token);
       setLoginError(false);
