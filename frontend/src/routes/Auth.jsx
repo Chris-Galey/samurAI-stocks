@@ -1,7 +1,10 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import Signup from "../components/authentication/Signup";
+import Login from "../components/authentication/Login";
+
 export default function Auth() {
-  return (
-    <h1>
-      Auth with login and signup components inside here based on conditional
-    </h1>
-  );
+  const { sharedState } = useContext(AuthContext);
+
+  return <>{!sharedState.signedup ? <Signup /> : <Login />}</>;
 }
