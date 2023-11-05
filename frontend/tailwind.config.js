@@ -10,6 +10,7 @@ export default {
       buttonColor: "#2563eb", //blue 600
       secondaryColor: "#fafafa", //neutral 50
       textColor: "#0a0a0a", //neutral 950
+      green: "#b2f2bb",
     },
   },
   plugins: [],

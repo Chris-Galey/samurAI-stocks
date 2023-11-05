@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+
+
+import { useState } from "react";
+import { Outlet, Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import myImage from '../assets/samurai.png';
 import Dropdown from 'react-bootstrap/Dropdown';
 import HomeIcon from '@mui/icons-material/Home';
@@ -9,19 +12,37 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 
 export default function Root() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
-
+  
+ const [username, setUsername] = useState("");
+  const [authStatus, setAuthStatus] = useState(false);
+  const [authToken, setAuthToken] = useState("");
+  const [signedup, setSignedup] = useState(false);
+  const sharedState = {
+    username,
+    setUsername,
+    authStatus,
+    setAuthStatus,
+    authToken,
+    setAuthToken,
+    signedup,
+    setSignedup,
+  };
+  
+  
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
   const handleLogout = () => {
-    setLoggedIn(false);
-    setUsername('');
+    sharedState.setUsername("");
+    sharedState.setAuthStatus(false);
+    sharedState.setAuthToken("");
+    sharedState.setSignedup(false);
+    localStorage.removeItem("token");
   };
 
   return (
+     <AuthContext.Provider value={{ sharedState }}>
     <div className="w-full bg-bgColor flex-col h-screen overflow-hidden">
       <header className="h-32 bg-bgColor">
         <nav className="text-3xl font-bold flex items-center">
@@ -46,7 +67,7 @@ export default function Root() {
                 <ExploreIcon />
                 Explore
               </Dropdown.Item>
-              <Dropdown.Item as={Link} to="/news">
+              <Dropdown.Item as={Link} to="/dashboard/news">
                 <CellTowerIcon />
                 News
               </Dropdown.Item>
@@ -73,5 +94,7 @@ export default function Root() {
         <Outlet />
       </div>
     </div>
+       </AuthContext.Provider>
   );
 }
+
