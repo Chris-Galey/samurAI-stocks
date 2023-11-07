@@ -6,7 +6,7 @@ export DEBUG=True
 export POSTGRES_DB=stocks
 export POSTGRES_USER=postgres
 export POSTGRES_PASSWORD=postgres
-# export API_KEY=$1
+export API_KEY=$1
 
 docker-compose -f docker-compose.local.yml up -d --build
 
