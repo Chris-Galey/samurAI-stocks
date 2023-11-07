@@ -6,5 +6,9 @@ import Login from "../components/authentication/Login";
 export default function Auth() {
   const { sharedState } = useContext(AuthContext);
 
-  return <>{!sharedState.signedup ? <Signup /> : <Login />}</>;
+  return (
+    <div className="flex flex-col place-items-center">
+      {!sharedState.signedup ? <Signup /> : <Login />}
+    </div>
+  );
 }

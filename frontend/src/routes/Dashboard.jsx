@@ -8,7 +8,7 @@ export default function Dashboard() {
         <Link to="watchlist">watchlist</Link>
         <Link to="news">News</Link>
       </nav>
-      <div className="w-9/12">
+      <div className="w-9/12 p-10">
         <Outlet />
       </div>
     </div>

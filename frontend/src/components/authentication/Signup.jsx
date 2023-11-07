@@ -22,7 +22,10 @@ export default function Signup() {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form
+      onSubmit={handleFormSubmit}
+      className="flex flex-col place-content-center gap-5 p-10 bg-green/50 w-1/4 min-h-[40vh]"
+    >
       <h2>Register a new account</h2>
 
       <input
