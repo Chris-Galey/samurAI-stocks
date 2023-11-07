@@ -75,7 +75,7 @@ export default function Root() {
                 <DashboardIcon />
                 Personal Dashboard
               </Dropdown.Item>
-              {loggedIn ? (
+              {sharedState.authStatus ? (
                 <>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
@@ -83,7 +83,7 @@ export default function Root() {
               ) : null}
             </Dropdown.Menu>
           </Dropdown>
-          {loggedIn ? (
+          {sharedState.authStatus ? (
             <div className="ml-auto">
               Welcome, {username}
             </div>
