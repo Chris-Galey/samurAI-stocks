@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import WatchlistView, WatchlistRetrieveDestroyView, MarketStatusView, StockSymbolsView, MarketHolidaysView, CompanyProfileView
+from .views import WatchlistView, WatchlistRetrieveDestroyView, MarketStatusView, StockSymbolsView, MarketHolidaysView, CompanyProfileView, StockSymbolLookupView
 
 urlpatterns =[
     path('', WatchlistView.as_view(), name='my_watchlist'),
@@ -8,9 +8,12 @@ urlpatterns =[
 
     path('marketstatus/', MarketStatusView.as_view(), name='get_market_status'),
 
-    path('stocksymbols/', StockSymbolsView.as_view(), name='get_stock_symbols'),
-
     path('marketholidays/', MarketHolidaysView.as_view(), name='get_market_holidays'),
 
+    path('stocksymbols/', StockSymbolsView.as_view(), name='get_stock_symbols'),
+
+    path('stocksymbollookup/', StockSymbolLookupView.as_view(), name='lookup_stock_symbol'),
+
     path('companyprofile/', CompanyProfileView.as_view(), name='get_company'),
+
 ]
