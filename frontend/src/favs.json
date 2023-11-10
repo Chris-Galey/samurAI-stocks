@@ -1,0 +1,20 @@
+[
+  {
+    "category": "technology",
+    "datetime": 1596589501,
+    "headline": "Square surges after reporting 64% jump in revenue, more customers using Cash App",
+    "id": 5085164,
+    "source": "CNBC",
+    "summary": "Shares of Square soared on Tuesday evening after posting better-than-expected quarterly results and strong growth in its consumer payments app.",
+    "url": "https://www.cnbc.com/2020/08/04/square-sq-earnings-q2-2020.html"
+  },
+  {
+    "category": "business",
+    "datetime": 1596588232,
+    "headline": "B&G Foods CEO expects pantry demand to hold up post-pandemic",
+    "id": 5085113,
+    "source": "CNBC",
+    "summary": "\"I think post-Covid, people will be working more at home, which means people will be eating more breakfast\" and other meals at home, B&G CEO Ken Romanzi said.",
+    "url": "https://www.cnbc.com/2020/08/04/bg-foods-ceo-expects-pantry-demand-to-hold-up-post-pandemic.html"
+  }
+]
