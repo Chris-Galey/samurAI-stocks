@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { ResponsiveLine } from "@nivo/line";
+
 
 export default function Watchlist() {
   const [watchlist, setWatchlist] = useState([]);
@@ -71,15 +71,6 @@ export default function Watchlist() {
               <div className="stock-info">
                 <span className="stock-symbol">{stock.symbol}</span>
                 <span className="stock-name">{stock.name}</span>
-              </div>
-              <div className="small-line-chart">
-                {stockData[stock.symbol] && stockData[stock.symbol].data.length > 0 ? (
-                  <ResponsiveLine
-                    data={stockData[stock.symbol].data}
-                  />
-                ) : (
-                  <div>No data available</div>
-                )}
               </div>
             </div>
           ))}
