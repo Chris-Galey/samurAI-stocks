@@ -51,9 +51,8 @@ class WatchlistRetrieveDestroyView(RetrieveUpdateDestroyAPIView):
 
 #Finnhub API view
 
-# finnhub_client = finnhub.Client(api_key=os.getenv("FINNHUB_API_KEY"))
+finnhub_client = finnhub.Client(api_key=os.getenv("FINNHUB_API_KEY"))
 
-finnhub_client = finnhub.Client(api_key='cl23fq1r01qinfqoear0cl23fq1r01qinfqoearg')
 
 class MarketStatusView(APIView):
     permission_classes = [IsAuthenticated]
