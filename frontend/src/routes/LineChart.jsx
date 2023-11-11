@@ -7,12 +7,13 @@ const LineChart = () => {
   const [apiKey, setApiKey] = useState('');
 
   const fetchApiKey = async () => {
-
-      const response = await fetch('/get_finnhub_api_key/');
+      const baseUrl = import.meta.env.VITE_BASE_URL;
+      const response = await fetch(`http://${baseUrl}/watchlist/get_finnhub_api_key/`);
       const data = await response.json();
 
       if (data.api_key) {
         setApiKey(data.api_key);
+        fetchData()
       } else {
         console.error('Error fetching Finnhub API key');
       }
