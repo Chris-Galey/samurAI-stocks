@@ -1,8 +1,6 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 /* @font-face {
   font-family: 'Roboto';
@@ -10,41 +8,50 @@
 } */
 
 .modern-button {
-    background-color: #1ccb94;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  
-  }
+  background-color: #1ccb94;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.modern-button:disabled {
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .samLogo{
-    max-width: 30vh;
-  }
-  
-  .navLogo {
-    margin-left: 10px;
-    max-width: 70px;
-    margin-bottom: 15px;
-    margin-right: 20px;
-  }
-  
-  .navbar-logo {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navLogo {
-    margin-left: 10px;
-  }
-  
-  .dropdown-menu {
-    flex-direction: column;
-    font-size: x-large;
-    margin-left: auto;
-    background-color: #f1f5f9;
-  }
+.samLogo {
+  max-width: 30vh;
+}
 
+.navLogo {
+  margin-left: 10px;
+  max-width: 70px;
+  margin-bottom: 15px;
+  margin-right: 20px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navLogo {
+  margin-left: 10px;
+}
+
+.dropdown-menu {
+  flex-direction: column;
+  font-size: x-large;
+  margin-left: auto;
+  background-color: #f1f5f9;
+}
