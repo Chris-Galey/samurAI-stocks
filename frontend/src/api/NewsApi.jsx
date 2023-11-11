@@ -1,7 +1,7 @@
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const getNews = async () => {
-  const data = await fetch(`${baseUrl}/news`, {
+  const data = await fetch(`${baseUrl}/news/get-news`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
