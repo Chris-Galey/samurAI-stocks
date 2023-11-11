@@ -123,3 +123,11 @@ class CompanyProfileView(APIView):
         else:
             return JsonResponse({'error': 'Symbol parameter is required'})
 
+
+def get_finnhub_api_key(request):
+    api_key = os.getenv("FINNHUB_API_KEY")
+
+    if api_key:
+        return JsonResponse({'api_key': api_key})
+    else:
+        return JsonResponse({'error': 'Finnhub API key not found'}, status=500)
