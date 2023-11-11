@@ -1,4 +1,3 @@
-
 {
   "name": "frontend",
   "private": true,
@@ -16,6 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.16",
+    "@nivo/line": "^0.83.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
@@ -38,4 +38,3 @@
     "vite": "^4.4.5"
   }
 }
-
