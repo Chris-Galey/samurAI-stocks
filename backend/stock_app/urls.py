@@ -1,9 +1,5 @@
 from django.urls import path
-<<<<<<< HEAD
-from .views import WatchlistView, WatchlistRetrieveDestroyView, MarketStatusView, StockSymbolsView, MarketHolidaysView, CompanyProfileView, get_finnhub_api_key
-=======
 from .views import WatchlistView, WatchlistRetrieveDestroyView, MarketStatusView, StockSymbolsView, MarketHolidaysView, CompanyProfileView, StockSymbolLookupView, get_finnhub_api_key
->>>>>>> main
 
 urlpatterns =[
     path('', WatchlistView.as_view(), name='my_watchlist'),
@@ -22,8 +18,4 @@ urlpatterns =[
 
     path('get_finnhub_api_key/', get_finnhub_api_key, name='get_finnhub_api_key'),
 
-<<<<<<< HEAD
 ]
-=======
-]
->>>>>>> main
