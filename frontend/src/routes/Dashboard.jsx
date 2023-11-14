@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, Link, useLocation} from "react-router-dom";
+import { Routes, Route, Link, useLocation, Outlet} from "react-router-dom";
 import LineChart from "./LineChart";
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -33,7 +33,7 @@ const Dashboard = () => {
           <Link to="/dashboard/watchlist" className="text-white text-lg mb-2 block cursor-pointer">
           Watchlist
           </Link>
-          <a href="#news" className="text-white text-lg mb-2 block">
+          <a href="/dashboard/news" className="text-white text-lg mb-2 block">
             News
           </a>
         </div>
@@ -47,16 +47,7 @@ const Dashboard = () => {
           <MenuIcon />
         </IconButton>
       </div>
-      <div className="flex-1 ">
-        <h1 className="text-3xl font-semibold mb-5 text-center">Stock Price Dashboard</h1>
-        <div className="flex justify-center">
-          <LineChart />
-        </div>
-        <Routes>
-          <Route path="explore" element={<LineChart />} />
-          <Route path="watchlist" element={<Watchlist />} />
-        </Routes>
-      </div>
+      <Outlet />
     </div>
   );
 };

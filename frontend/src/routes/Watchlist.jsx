@@ -1,15 +1,25 @@
 
 import React, { useState, useEffect } from "react";
-
+import { AuthContext } from "../context/AuthContext";
+import LineChart from "./LineChart";
 
 export default function Watchlist() {
   const [watchlist, setWatchlist] = useState([]);
   const [newSymbol, setNewSymbol] = useState('');
   const [stockData, setStockData] = useState({});
   const [allSymbols, setAllSymbols] = useState([]); 
+  const [authToken, setAuthToken] = useState("");
+  const sharedState = {
+    authToken,
+  }
+
   const fetchAllSymbols = async () => {
     try {
-      const response = await fetch(`/watchlist/stocksymbols/`);
+      const response = await fetch(`http://localhost:8000/watchlist/stocksymbols/`, {
+        headers: {
+          Authorization: `Bearer  ${authToken}`,
+        },
+      })
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -46,10 +56,15 @@ export default function Watchlist() {
 
     fetchDataForWatchlist();
   }, [watchlist]);
+
+  
   return (
+    
     <>
+    <AuthContext.Provider value={{ sharedState }}>
       <h1>Watchlist</h1>
       <div>
+      <LineChart />
         <div>
           <select
             value={newSymbol}
@@ -76,6 +91,7 @@ export default function Watchlist() {
           ))}
         </div>
       </div>
+      </AuthContext.Provider>
     </>
   );
 }

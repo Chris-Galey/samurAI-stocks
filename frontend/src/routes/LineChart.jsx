@@ -8,7 +8,7 @@ const LineChart = () => {
 
   const fetchApiKey = async () => {
       const baseUrl = import.meta.env.VITE_BASE_URL;
-      const response = await fetch(`http://${baseUrl}/watchlist/get_finnhub_api_key/`);
+      const response = await fetch(`http://${baseUrl}watchlist/get_finnhub_api_key/`);
       const data = await response.json();
 
       if (data.api_key) {
