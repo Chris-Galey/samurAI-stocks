@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { deleteFavNews } from "../../api/NewsApi";
 export default function FavNews({
   searchTerm,
   allFavs,
@@ -12,7 +12,7 @@ export default function FavNews({
     setNews(allFavs);
   }, [allFavs]);
   const handleDeleteArticle = async (id) => {
-    // await deleteFavNews(id);
+    await deleteFavNews(id);
     updateDeletedFavs(id);
   };
   const filteredNews = news.filter((article) => {

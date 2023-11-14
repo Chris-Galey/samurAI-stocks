@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-// import { postFavNews } from "../../api/NewsApi";
-import newsData from "../../news.json";
-
+import { getNews, postFavNews } from "../../api/NewsApi";
 export default function AllNews({
   searchTerm,
   allFavs,
@@ -13,8 +11,8 @@ export default function AllNews({
 
   useEffect(() => {
     const fetchAllNews = async () => {
-      //   const allNews = await postFavNews();
-      setNews(newsData);
+      const allNews = await getNews();
+      setNews(allNews);
       setFavs(allFavs);
     };
     fetchAllNews();
@@ -24,6 +22,7 @@ export default function AllNews({
     return favsId.includes(id);
   };
   const handleUpdateFavs = async (article) => {
+    await postFavNews(article);
     updateAllFavs(article);
   };
 

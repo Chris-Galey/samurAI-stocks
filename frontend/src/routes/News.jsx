@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-// import { getFavNews } from "../api/NewsApi";
-import favorites from "../favs.json";
+import { getFavNews } from "../api/NewsApi";
+
 import AllNews from "../components/news/AllNews";
 import FavNews from "../components/news/FavNews";
 import TextField from "@mui/material/TextField";
@@ -13,12 +13,14 @@ export default function News() {
   const [favs, setFavs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [newsCategory, setNewsCategory] = useState("all news");
-  console.log(newsCategory);
   useEffect(() => {
-    setFavs(favorites);
+    const fetchFavs = async () => {
+      const favNews = await getFavNews();
+      setFavs(favNews);
+    };
+    fetchFavs();
   }, []);
   const handleUpdateFavs = async (article) => {
-    // await postFavNews(article);
     setFavs([...favs, article]);
   };
   const handleUpdateDeletedFavs = async (id) => {
