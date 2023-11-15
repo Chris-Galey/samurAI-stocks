@@ -8,3 +8,4 @@ export default function Auth() {
 
   return <>{!sharedState.signedup ? <Signup /> : <Login />}</>;
 }
+
