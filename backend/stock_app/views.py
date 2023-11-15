@@ -53,9 +53,10 @@ class WatchlistRetrieveDestroyView(RetrieveUpdateDestroyAPIView):
 
 # finnhub_client = finnhub.Client(api_key=os.getenv("FINNHUB_API_KEY"))
 
-finnhub_client = finnhub.Client(api_key='cl23fq1r01qinfqoear0cl23fq1r01qinfqoearg')
+finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
 
 class MarketStatusView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -64,6 +65,7 @@ class MarketStatusView(APIView):
         return JsonResponse(market_status)
 
 class MarketHolidaysView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -72,6 +74,7 @@ class MarketHolidaysView(APIView):
         return JsonResponse(market_holidays, safe=False)
 
 class StockSymbolsView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
