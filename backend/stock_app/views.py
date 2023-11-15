@@ -82,33 +82,15 @@ class StockSymbolsView(APIView):
 class StockSymbolLookupView(APIView):
     permission_classes = [IsAuthenticated]
 
-    # def get(self, request):
-    #     symbol = request.query_params.get('symbol')
-
-    #     if symbol:
-    #         symbol_lookup = finnhub_client.symbol_lookup(symbol)
-    #         return JsonResponse(symbol_lookup, safe=False)
-    #     else:
-    #         return JsonResponse({'error': 'Symbol parameter is required'})
-
     def get(self, request, *args, **kwargs):
-        # Extract the 'symbol' parameter from the query parameters of the GET request
         symbol = request.query_params.get('symbol', '')
 
-        # Check if the 'symbol' parameter is missing or empty
         if not symbol:
-            # Return a JSON response with an error message and a 400 Bad Request status code
             return JsonResponse({'error': 'Symbol parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
-
         try:
-            # Attempt to fetch symbol information from the Finnhub API using the provided symbol
             symbol_info = finnhub_client.symbol_lookup(symbol)
-
-            # Return a JSON response with the symbol information
             return JsonResponse(symbol_info, safe=False)
         except finnhub.FinnhubAPIException as e:
-            # If an exception (error) occurs during the API request, handle it
-            # Return a JSON response with the error message and the HTTP status code from the exception
             return JsonResponse({'error': str(e)}, status=e.http_status)
         
 class CompanyProfileView(APIView):

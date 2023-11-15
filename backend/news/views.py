@@ -1,6 +1,5 @@
 import requests
 from datetime import datetime
-from .models import NewsItem
 import finnhub
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
@@ -49,7 +48,7 @@ def favorite_articles(request):
 
     elif request.method == 'DELETE':
         article_id = request.query_params.get('id')
-        article = FavoriteArticle.objects.filter(id=article_id, user=request.user)
+        article = FavoriteArticle.objects.filter(id=id, user=request.user)
         if article.exists():
             article.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
