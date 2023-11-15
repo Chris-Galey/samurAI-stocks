@@ -10,7 +10,7 @@ import Explore from "./routes/Explore";
 import Watchlist from "./routes/Watchlist";
 import News from "./routes/News";
 import "./index.css";
-
+import Index from "./Index";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +40,10 @@ const router = createBrowserRouter([
             path: "news",
             element: <News />,
           },
+          {
+            index: true,
+            element: <Index />
+          }
         ],
       },
     ],
