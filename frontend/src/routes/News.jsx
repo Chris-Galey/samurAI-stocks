@@ -28,7 +28,7 @@ export default function News() {
   };
 
   return (
-    <div className=" flex flex-col gap-8 p-10 max-h-[80vh]">
+    <div className=" flex flex-col gap-8 p-10 max-h-[80vh] w-full">
       <FormControl className="w-1/12">
         <InputLabel id="demo-simple-select-label">Select View</InputLabel>
         <Select

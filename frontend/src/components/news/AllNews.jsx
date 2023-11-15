@@ -17,10 +17,12 @@ export default function AllNews({
     };
     fetchAllNews();
   }, [allFavs]);
+
   const handleCheckFavs = (id) => {
     const favsId = favs.map((fav) => fav.id);
     return favsId.includes(id);
   };
+
   const handleUpdateFavs = async (article) => {
     await postFavNews(article);
     updateAllFavs(article);
