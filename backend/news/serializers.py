@@ -1,19 +1,12 @@
 from rest_framework import serializers
-from .models import NewsItem, FavoriteArticle
-from django.contrib.auth.models import User
-
-class NewsItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = NewsItem
-        fields = '__all__'
-
+from .models import FavoriteArticle
 
 class FavoriteArticleSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.id')  
+    user = serializers.ReadOnlyField(source='user.id')  # Include the user ID
 
     class Meta:
         model = FavoriteArticle
-        fields = ['id', 'user', 'category', 'datetime', 'headline', 'summary', 'url']
+        fields = ['id', 'user', 'category', 'datetime', 'headline', 'news_id', 'related', 'summary', 'source', 'url']  
 
     def create(self, validated_data): 
         user = self.context['request'].user

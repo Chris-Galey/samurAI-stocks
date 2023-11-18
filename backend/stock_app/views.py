@@ -53,9 +53,10 @@ class WatchlistRetrieveDestroyView(RetrieveUpdateDestroyAPIView):
 
 # finnhub_client = finnhub.Client(api_key=os.getenv("FINNHUB_API_KEY"))
 
-finnhub_client = finnhub.Client(api_key="cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0")
+finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
 
 class MarketStatusView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -64,6 +65,7 @@ class MarketStatusView(APIView):
         return JsonResponse(market_status)
 
 class MarketHolidaysView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -72,6 +74,7 @@ class MarketHolidaysView(APIView):
         return JsonResponse(market_holidays, safe=False)
 
 class StockSymbolsView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -84,9 +87,9 @@ class StockSymbolLookupView(APIView):
 
     def get(self, request, *args, **kwargs):
         symbol = request.query_params.get('symbol', '')
+
         if not symbol:
             return JsonResponse({'error': 'Symbol parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
-
         try:
             symbol_info = finnhub_client.symbol_lookup(symbol)
             return JsonResponse(symbol_info, safe=False)
