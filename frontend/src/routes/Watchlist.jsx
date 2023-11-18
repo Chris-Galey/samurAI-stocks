@@ -1,97 +1,143 @@
-
-import React, { useState, useEffect } from "react";
-import { AuthContext } from "../context/AuthContext";
+import React, { useState, useEffect } from 'react';
 import LineChart from "./LineChart";
+import StockCandles from './stockCandles';
 
-export default function Watchlist() {
+export default function Watchlist(){
+
   const [watchlist, setWatchlist] = useState([]);
   const [newSymbol, setNewSymbol] = useState('');
   const [stockData, setStockData] = useState({});
-  const [allSymbols, setAllSymbols] = useState([]); 
-  const [authToken, setAuthToken] = useState("");
-  const sharedState = {
-    authToken,
-  }
-
-  const fetchAllSymbols = async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/watchlist/stocksymbols/`, {
-        headers: {
-          Authorization: `Bearer  ${authToken}`,
-        },
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      setAllSymbols(data); 
-    } catch (error) {
-      console.error("Error fetching stock symbols:", error);
-    }
-  };
+  const [allSymbols, setAllSymbols] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedStock, setSelectedStock] = useState(null);
+  const pageSize = 10;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     fetchAllSymbols();
-  }, []);
+  }, [localStorage.getItem('token')]);
 
-  const addSymbolToWatchlist = () => {
-    const symbol = newSymbol.toUpperCase();
+  const fetchAllSymbols = async () => {
+    const response = await fetch(`http://${baseUrl}/watchlist/stocksymbols/`, {
+      headers: {
+        Authorization: `token ${localStorage.getItem('token')}`,
+      },
+  });
 
-    if (!watchlist.some((stock) => stock.symbol === symbol)) {
-      setWatchlist([...watchlist, { symbol, name: 'Stock Name' }]);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data)
+      const symbols = data;
+      setAllSymbols(symbols);
+
+      }
+      const stockDataObj = {};
+      stockPrices.forEach((item) => {
+        stockDataObj[item.symbol] = item.price;
+      });
+      setStockData(stockDataObj);
+    } 
+
+  const handlePaginationChange = (direction) => {
+    if (direction === 'next') {
+      if (currentPage < Math.ceil(allSymbols.length / pageSize)) {
+        setCurrentPage((prevPage) => prevPage + 1);
+      }
+    } else if (direction === 'prev') {
+      if (currentPage > 1) {
+        setCurrentPage((prevPage) => prevPage - 1);
+      }
     }
-
-    setNewSymbol('');
   };
 
-  useEffect(() => {
-    const fetchDataForWatchlist = async () => {
-      const stockData = {};
-      for (const stock of watchlist) {
-        const data = await fetchStockData(stock.symbol);
-        stockData[stock.symbol] = data;
-      }
-      setStockData(stockData);
-    };
+  const handleStockClick = (stock) => {
+    console.log('Stock clicked:', stock);
+    setSelectedStock(stock);
+  };
 
-    fetchDataForWatchlist();
-  }, [watchlist]);
+  const handleCloseCard = () => {
+    setSelectedStock(null);
+  };
+
+
+  return (
+    <>
+      <div className="flex flex-col items-center justify-center">
+        {/* <LineChart /> */}
+  
+        <h1 className="mt-8 mb-4 text-2xl font-bold">Watchlist</h1>
+  
+        <div className="mb-8">
+          <div className="flex items-center space-x-4">
+            <div className="relative inline-block">
+              <input
+                type="text"
+                placeholder="Enter stock symbol"
+                value={newSymbol}
+                onChange={(event) => setNewSymbol(event.target.value)}
+                className="w-full h-8 pl-2 rounded-lg border border-gray-300 focus:outline-none focus:border-gray-500"
+              />
+              <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+            </div>
+          </div>
+          </div>
+        </div>
+  
+        <div className="watchlist-container">
+            {allSymbols.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((stock) => (
+              <div
+                key={stock.symbol}
+                className="watchlist-item"
+                onClick={() => handleStockClick(stock)}
+              >
+                <div className="flex justify-between items-center">
+                  <div className="stock-info flex justify-between">
+                    <span className="stock-symbol">{stock.symbol}</span>
+                  </div>
+                  <div className="stock-details">
+                    <span className="stock-name">{stock.name}</span>
+                    <span className="stock-description text-sm">{stock.description}</span>
+                </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+        {selectedStock && (
+        <div className="floating-card">
+          <h2>{selectedStock.name}</h2>
+          <p>{selectedStock.description}</p>
+          <StockCandles symbol={selectedStock.symbol} stockData={stockData} />
+          <button onClick={handleCloseCard}>Close</button>
+        </div>
+      )}
 
   
-  return (
-    
-    <>
-    <AuthContext.Provider value={{ sharedState }}>
-      <h1>Watchlist</h1>
-      <div>
-      <LineChart />
-        <div>
-          <select
-            value={newSymbol}
-            onChange={(e) => setNewSymbol(e.target.value)}
+        <div className="pagination-controls">
+          <button
+            className="pagination-button"
+            onClick={() => handlePaginationChange('prev')}
+            disabled={currentPage === 1}
           >
-            <option value="">Select a stock symbol</option>
-            {allSymbols.map((symbol) => (
-              <option key={symbol} value={symbol}>
-                {symbol}
-              </option>
-            ))}
-          </select>
-          <button onClick={addSymbolToWatchlist}>Add to Watchlist</button>
-        </div>
-
-        <div className="watchlist-container">
-          {watchlist.map((stock) => (
-            <div key={stock.symbol} className="watchlist-item">
-              <div className="stock-info">
-                <span className="stock-symbol">{stock.symbol}</span>
-                <span className="stock-name">{stock.name}</span>
-              </div>
-            </div>
-          ))}
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {Math.ceil(allSymbols.length / pageSize)}
+          </span>
+          <button
+            className="pagination-button"
+            onClick={() => handlePaginationChange('next')}
+            disabled={currentPage === Math.ceil(allSymbols.length / pageSize)}
+          >
+            Next
+          </button>
         </div>
       </div>
-      </AuthContext.Provider>
-    </>
-  );
+      </>
+    )
 }
+
+

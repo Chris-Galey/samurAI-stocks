@@ -55,3 +55,95 @@
   margin-left: auto;
   background-color: #f1f5f9;
 }
+
+
+.watchlist-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+}
+
+.watchlist-item {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  background-color: #f2f2f2;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.watchlist-item:hover {
+  background-color: #e6e6e6;
+}
+
+
+.watchlist-item .stock-info {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  gap: 0.5rem; 
+}
+
+.watchlist-item .stock-info .stock-symbol {
+  font-weight: bold;
+  color: #1ccb94;
+}
+
+
+.watchlist-item .stock-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end; 
+}
+
+
+.watchlist-item .stock-details .stock-name {
+  font-size: 1rem;
+  color: #1ccb94;
+}
+
+.watchlist-item .stock-details .stock-description {
+  padding-left: 20px;
+  font-size: 0.70rem;
+  color: #888888;
+}
+
+
+.floating-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  max-width: 400px; 
+}
+
+
+.floating-card h2 {
+  color: #333;
+}
+
+.floating-card p {
+  color: #666;
+}
+
+.floating-card button {
+  background-color: #1ccb94;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.floating-card button:hover {
+  background-color: #1ccb94;
+}
