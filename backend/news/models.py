@@ -6,7 +6,7 @@ class FavoriteArticle(models.Model):
     category = models.CharField(max_length=255)
     datetime = models.IntegerField()
     headline = models.CharField(max_length=255)
-    news_id = models.IntegerField(unique=True)
+    news_id = models.IntegerField(unique=False)
     related = models.TextField(blank=True)
     summary = models.TextField()
     source = models.CharField(max_length=255)

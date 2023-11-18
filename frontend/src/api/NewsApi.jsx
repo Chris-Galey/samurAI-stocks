@@ -2,7 +2,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 console.log(localStorage.getItem("token"));
 
 export const getNews = async () => {
-  const data = await fetch(`http://${baseUrl}/news/get-news/`, {
+  const data = await fetch(`http://${baseUrl}/news/get-news`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +25,8 @@ export const getFavNews = async () => {
 };
 
 export const deleteFavNews = async (id) => {
-  const data = await fetch(`http://${baseUrl}/favorites/${id}`, {
+  console.log(id);
+  const data = await fetch(`http://${baseUrl}/favorites/?id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +38,7 @@ export const deleteFavNews = async (id) => {
 
 export const postFavNews = async (article) => {
   console.log(article);
-  const data = await fetch(`http://${baseUrl}/news/favorites`, {
+  const data = await fetch(`http://${baseUrl}/news/favorites/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -47,11 +48,11 @@ export const postFavNews = async (article) => {
       category: article.category,
       datetime: article.datetime,
       headline: article.headline,
-      article_id: article.id,
-      source: article.source,
+      news_id: article.id,
+      related: article.related,
       summary: article.summary,
+      source: article.source,
       url: article.url,
     }),
   });
-  return await data.json();
 };

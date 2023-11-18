@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getFavNews } from "../api/NewsApi";
+import { getFavNews, getNews } from "../api/NewsApi";
 
 import AllNews from "../components/news/AllNews";
 import FavNews from "../components/news/FavNews";
@@ -11,20 +11,37 @@ import Select from "@mui/material/Select";
 export default function News() {
   const [view, setView] = useState("all");
   const [favs, setFavs] = useState([]);
+  const [news, setNews] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [newsCategory, setNewsCategory] = useState("all news");
+  console.log(news, favs);
   useEffect(() => {
     const fetchFavs = async () => {
       const favNews = await getFavNews();
       setFavs(favNews);
     };
     fetchFavs();
+
+    const fetchAllNews = async () => {
+      const allNews = await getNews();
+      setNews(allNews);
+    };
+    fetchAllNews();
   }, []);
-  const handleUpdateFavs = async (article) => {
-    setFavs([...favs, article]);
+
+  const postFavs = () => {
+    const fetchFavs = async () => {
+      const favNews = await getFavNews();
+      setFavs(favNews);
+    };
+    fetchFavs();
   };
-  const handleUpdateDeletedFavs = async (id) => {
-    setFavs(favs.filter((fav) => fav.id !== id));
+  const handleDeleteFav = async () => {
+    const fetchFavs = async () => {
+      const favNews = await getFavNews();
+      setFavs(favNews);
+    };
+    fetchFavs();
   };
 
   return (
@@ -85,15 +102,16 @@ export default function News() {
             <AllNews
               searchTerm={searchTerm}
               searchCategory={newsCategory}
-              allFavs={favs}
-              updateAllFavs={handleUpdateFavs}
+              updatedFavs={favs}
+              updatedNews={news}
+              postFavs={postFavs}
             />
           ) : (
             <FavNews
               searchTerm={searchTerm}
               searchCategory={newsCategory}
-              allFavs={favs}
-              updateDeletedFavs={handleUpdateDeletedFavs}
+              updatedFavs={favs}
+              deleteFav={handleDeleteFav}
             />
           )}
         </ul>
