@@ -14,7 +14,8 @@ export default function News() {
   const [news, setNews] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [newsCategory, setNewsCategory] = useState("all news");
-  console.log(news, favs);
+  console.log(favs);
+
   useEffect(() => {
     const fetchFavs = async () => {
       const favNews = await getFavNews();

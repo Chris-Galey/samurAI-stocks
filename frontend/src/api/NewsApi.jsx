@@ -26,14 +26,15 @@ export const getFavNews = async () => {
 
 export const deleteFavNews = async (id) => {
   console.log(id);
-  const data = await fetch(`http://${baseUrl}/favorites/?id=${id}`, {
+  const data = await fetch(`http://${baseUrl}/news/favorites/?id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Token ${localStorage.getItem("token")}`,
     },
   });
-  return data.json();
+  const res = data;
+  return res;
 };
 
 export const postFavNews = async (article) => {

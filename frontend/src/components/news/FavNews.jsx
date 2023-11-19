@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { deleteFavNews } from "../../api/NewsApi";
 export default function FavNews({
   searchTerm,
@@ -6,17 +5,12 @@ export default function FavNews({
   deleteFav,
   searchCategory,
 }) {
-  const [favs, setFavs] = useState([]);
-  useEffect(() => {
-    setFavs(updatedFavs);
-  }, [updatedFavs]);
-
   const handleDeleteArticle = async (id) => {
     console.log(id);
     await deleteFavNews(id);
     deleteFav();
   };
-  const filteredNews = favs.filter((article) => {
+  const filteredNews = updatedFavs.filter((article) => {
     const isMatchingCategory = article.category === searchCategory;
     const isMatchingTerm = article.headline
       .toLowerCase()
