@@ -5,10 +5,11 @@ const LineChart = () => {
   const [data, setData] = useState([]);
   const [symbol, setSymbol] = useState('AAPL');
   const [apiKey, setApiKey] = useState('');
+  const newApikEY = 'cl23fq1r01qinfqoear0cl23fq1r01qinfqoearg'
 
   const fetchApiKey = async () => {
       const baseUrl = import.meta.env.VITE_BASE_URL;
-      const response = await fetch(`http://${baseUrl}watchlist/get_finnhub_api_key/`);
+      const response = await fetch(`http://${baseUrl}/watchlist/get_finnhub_api_key/`);
       const data = await response.json();
 
       if (data.api_key) {
@@ -21,7 +22,10 @@ const LineChart = () => {
 
   useEffect(() => {
     fetchApiKey();
-  }, []);
+    if(apiKey){
+      fetchStockData()
+    }
+  }, [apiKey]);
 
   const fetchStockData = async (symbol) => {
     const now = Math.floor(Date.now() / 1000);
@@ -87,6 +91,7 @@ const LineChart = () => {
             format: '%b %d',
             tickRotation: -45,
           }}
+          colors={{ scheme: 'set3' }}
           enablePoints={false}
           enableSlices="x"
         />

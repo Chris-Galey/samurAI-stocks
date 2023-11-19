@@ -53,9 +53,10 @@ class WatchlistRetrieveDestroyView(RetrieveUpdateDestroyAPIView):
 
 # finnhub_client = finnhub.Client(api_key=os.getenv("FINNHUB_API_KEY"))
 
-finnhub_client = finnhub.Client(api_key='cl23fq1r01qinfqoear0cl23fq1r01qinfqoearg')
+finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
 
 class MarketStatusView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -64,6 +65,7 @@ class MarketStatusView(APIView):
         return JsonResponse(market_status)
 
 class MarketHolidaysView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -72,6 +74,7 @@ class MarketHolidaysView(APIView):
         return JsonResponse(market_holidays, safe=False)
 
 class StockSymbolsView(APIView):
+    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -104,9 +107,34 @@ class CompanyProfileView(APIView):
             return JsonResponse(company_profile, safe=False)
         else:
             return JsonResponse({'error': 'Symbol parameter is required'})
+        
+class StockCandles(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        symbol = request.query_params.get('symbol')
+
+        if symbol:
+            candles_data = finnhub_client.stock_candles(symbol=symbol, resolution='D')
+            return JsonResponse(candles_data, safe=False)
+        if not symbol:
+            return JsonResponse({'error': 'Symbol parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class Quote(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        symbol = request.query_params.get('symbol')
+        
+        if symbol:
+            company_quote = finnhub_client.qoute(symbol=symbol)
+            return JsonResponse(company_quote)
 
 def get_finnhub_api_key(request):
-    api_key = os.getenv("FINNHUB_API_KEY")
+    # api_key = os.getenv("FINNHUB_API_KEY")
+    # api_key = 'cl23fq1r01qinfqoear0cl23fq1r01qinfqoearg'
+    api_key = 'cl23dr9r01qinfqoe8l0cl23dr9r01qinfqoe8lg'
 
     if api_key:
         return JsonResponse({'api_key': api_key})

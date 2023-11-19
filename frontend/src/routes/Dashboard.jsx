@@ -24,19 +24,18 @@ const Dashboard = () => {
           Close
         </button>
         <h3 className="text-white text-2xl mb-4">Dashboard</h3>
-        <Link to="/dashboard/explore" className="text-white text-lg mb-2 block">
-          Explore
-        </Link>
-        <Link
-          to="/dashboard/watchlist"
-          className="text-white text-lg mb-2 block cursor-pointer"
-        >
+
+          <Link to="/dashboard/explore" className="text-white text-lg mb-2 block">
+            Explore
+          </Link>
+          <Link to="/dashboard/watchlist" className="text-white text-lg mb-2 block cursor-pointer">
           Watchlist
-        </Link>
-        <Link to="/dashboard/news" className="text-white text-lg mb-2 block">
-          News
-        </Link>
-      </div>
+          </Link>
+          <Link to="/dashboard/news" className="text-white text-lg mb-2 block">
+            News
+          </Link>
+        </div>
+
 
       <div className="flex justify-between items-center bg-primaryColor p-4 shadow-md ">
         <IconButton
