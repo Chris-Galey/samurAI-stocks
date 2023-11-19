@@ -39,7 +39,7 @@ export default function Root() {
   };
 
   return (
-    <AuthContext.Provider value={{ sharedState }}>
+    <AuthContext.Provider value={{ sharedState, authToken }}>
       <div className="w-full bg-bgColor flex-col min-h-screen">
         <header className="h-32 bg-bgColor">
           <nav className="text-3xl font-bold flex items-center">

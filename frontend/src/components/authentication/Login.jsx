@@ -17,7 +17,7 @@ export default function Login() {
       localStorage.setItem("token", data.token);
       setLoginError(false);
       setPassword("");
-      setUsername("");
+      setUsername("")
       sharedState.setAuthStatus(true);
       sharedState.setAuthToken(data.token);
       sharedState.setUsername(username);

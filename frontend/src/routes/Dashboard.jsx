@@ -27,15 +27,15 @@ const Dashboard = () => {
           Close
         </button>
         <h3 className="text-white text-2xl mb-4">Dashboard</h3>
-          <a href="/dashboard/explore" className="text-white text-lg mb-2 block">
+          <Link to="/dashboard/explore" className="text-white text-lg mb-2 block">
             Explore
-          </a>
+          </Link>
           <Link to="/dashboard/watchlist" className="text-white text-lg mb-2 block cursor-pointer">
           Watchlist
           </Link>
-          <a href="/dashboard/news" className="text-white text-lg mb-2 block">
+          <Link to="/dashboard/news" className="text-white text-lg mb-2 block">
             News
-          </a>
+          </Link>
         </div>
 
       <div className="flex justify-between items-center bg-primaryColor p-4 shadow-md ">

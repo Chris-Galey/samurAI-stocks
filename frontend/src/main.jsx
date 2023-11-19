@@ -10,7 +10,9 @@ import Explore from "./routes/Explore";
 import Watchlist from "./routes/Watchlist";
 import News from "./routes/News";
 import "./index.css";
-import Index from "./Index";
+import Index from './routes/Index'
+
+
 const router = createBrowserRouter([
   {
     path: "/",
