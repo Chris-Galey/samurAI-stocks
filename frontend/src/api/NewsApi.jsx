@@ -1,54 +1,59 @@
 const baseUrl = import.meta.env.VITE_BASE_URL;
+console.log(localStorage.getItem("token"));
 
 export const getNews = async () => {
-  const data = await fetch(`${baseUrl}/news/get-news`, {
+  const data = await fetch(`http://${baseUrl}/news/get-news`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${localStorage.getItem("token")}`,
     },
   });
-  return await data.json();
+  const res = await data.json();
+  return res;
 };
 
 export const getFavNews = async () => {
-  const data = await fetch(`${baseUrl}/news/favorites`, {
+  const data = await fetch(`http://${baseUrl}/news/favorites`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${localStorage.getItem("token")}`,
     },
   });
   return await data.json();
 };
 
 export const deleteFavNews = async (id) => {
-  const data = await fetch(`${baseUrl}/favorites/${id}`, {
+  console.log(id);
+  const data = await fetch(`http://${baseUrl}/news/favorites/?id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${localStorage.getItem("token")}`,
     },
   });
-  return data.json();
+  const res = data;
+  return res;
 };
 
 export const postFavNews = async (article) => {
-  const data = await fetch(`${baseUrl}/news/favorites`, {
+  console.log(article);
+  const data = await fetch(`http://${baseUrl}/news/favorites/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `token ${localStorage.getItem("token")}`,
-      body: JSON.stringify({
-        category: article.category,
-        datetime: article.datetime,
-        headline: article.headline,
-        id: article.id,
-        source: article.source,
-        summary: article.summary,
-        url: article.url,
-      }),
+      Authorization: `Token ${localStorage.getItem("token")}`,
     },
+    body: JSON.stringify({
+      category: article.category,
+      datetime: article.datetime,
+      headline: article.headline,
+      news_id: article.id,
+      related: article.related,
+      summary: article.summary,
+      source: article.source,
+      url: article.url,
+    }),
   });
-  return await data.json();
 };

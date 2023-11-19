@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-// import { getFavNews } from "../api/NewsApi";
-import favorites from "../favs.json";
+import { getFavNews, getNews } from "../api/NewsApi";
+
 import AllNews from "../components/news/AllNews";
 import FavNews from "../components/news/FavNews";
 import TextField from "@mui/material/TextField";
@@ -11,22 +11,42 @@ import Select from "@mui/material/Select";
 export default function News() {
   const [view, setView] = useState("all");
   const [favs, setFavs] = useState([]);
+  const [news, setNews] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [newsCategory, setNewsCategory] = useState("all news");
-  console.log(newsCategory);
+  console.log(favs);
+
   useEffect(() => {
-    setFavs(favorites);
+    const fetchFavs = async () => {
+      const favNews = await getFavNews();
+      setFavs(favNews);
+    };
+    fetchFavs();
+
+    const fetchAllNews = async () => {
+      const allNews = await getNews();
+      setNews(allNews);
+    };
+    fetchAllNews();
   }, []);
-  const handleUpdateFavs = async (article) => {
-    // await postFavNews(article);
-    setFavs([...favs, article]);
+
+  const postFavs = () => {
+    const fetchFavs = async () => {
+      const favNews = await getFavNews();
+      setFavs(favNews);
+    };
+    fetchFavs();
   };
-  const handleUpdateDeletedFavs = async (id) => {
-    setFavs(favs.filter((fav) => fav.id !== id));
+  const handleDeleteFav = async () => {
+    const fetchFavs = async () => {
+      const favNews = await getFavNews();
+      setFavs(favNews);
+    };
+    fetchFavs();
   };
 
   return (
-    <div className=" flex flex-col gap-8 p-10 max-h-[80vh]">
+    <div className=" flex flex-col gap-8 p-10 max-h-[80vh] w-full">
       <FormControl className="w-1/12">
         <InputLabel id="demo-simple-select-label">Select View</InputLabel>
         <Select
@@ -83,15 +103,16 @@ export default function News() {
             <AllNews
               searchTerm={searchTerm}
               searchCategory={newsCategory}
-              allFavs={favs}
-              updateAllFavs={handleUpdateFavs}
+              updatedFavs={favs}
+              updatedNews={news}
+              postFavs={postFavs}
             />
           ) : (
             <FavNews
               searchTerm={searchTerm}
               searchCategory={newsCategory}
-              allFavs={favs}
-              updateDeletedFavs={handleUpdateDeletedFavs}
+              updatedFavs={favs}
+              deleteFav={handleDeleteFav}
             />
           )}
         </ul>
