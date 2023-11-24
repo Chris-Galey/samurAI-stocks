@@ -53,7 +53,7 @@ class WatchlistRetrieveDestroyView(RetrieveUpdateDestroyAPIView):
 
 # finnhub_client = finnhub.Client(api_key=os.getenv("FINNHUB_API_KEY"))
 
-finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
+finnhub_client = finnhub.Client(api_key='cl3t4lpr01qj63a9i9h0cl3t4lpr01qj63a9i9hg')
 
 class MarketStatusView(APIView):
     # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')

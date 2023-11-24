@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -10,8 +9,8 @@ import Explore from "./routes/Explore";
 import Watchlist from "./routes/Watchlist";
 import News from "./routes/News";
 import "./index.css";
-import Index from './routes/Index'
-
+import Index from "./routes/Index";
+import StockDetail from "./routes/StockDetail";
 
 const router = createBrowserRouter([
   {
@@ -44,8 +43,12 @@ const router = createBrowserRouter([
           },
           {
             index: true,
-            element: <Index />
-          }
+            element: <Index />,
+          },
+          {
+            path: "stocks/:symbol",
+            element: <StockDetail />,
+          },
         ],
       },
     ],
@@ -57,4 +60,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-
