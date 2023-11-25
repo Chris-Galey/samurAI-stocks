@@ -22,4 +22,5 @@ urlpatterns = [
     path('accounts/', include("accounts.urls")),
     path('watchlist/', include("stock_app.urls")),
     path('news/', include('news.urls')),
+    path('alpha_api/', include('ml_api.urls'))
 ]
