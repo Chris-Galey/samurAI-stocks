@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import LineChart from "./LineChart";
-import StockCandles from './stockCandles';
+// import StockCandles from './stockCandles';
+import StockQuote from './Qoute';
+import CompanyProfile from '../components/CompanyProf'
+import { Link, Navigate } from 'react-router-dom'
+import TablePagination from '@mui/material/TablePagination';
+
+
 
 export default function Explore(){
 
@@ -9,9 +15,13 @@ const [newSymbol, setNewSymbol] = useState('');
 const [stockData, setStockData] = useState({});
 const [allSymbols, setAllSymbols] = useState([]);
 const [currentPage, setCurrentPage] = useState(1);
-const [selectedStock, setSelectedStock] = useState(null); 
+const [selectedStock, setSelectedStock] = useState(null);
+const [selectedSymbol, setSelectedSymbol] = useState(null);
+const [cachedSymbols, setCachedSymbols] = useState([]);
+const [page, setPage] = useState(2)
+const [rowsPerPage, setRowsPerPage] = useState(10)
   const baseUrl = import.meta.env.VITE_BASE_URL;
-
+// const baseUrl = 'localhost:8000'
 const pageSize = 10;
 
 useEffect(() => {
@@ -30,44 +40,36 @@ const fetchAllSymbols = async () => {
     console.log(data)
     const symbols = data;
     setAllSymbols(symbols);
+    setCachedSymbols(symbols);
 
     }
-    const stockDataObj = {};
-    stockPrices.forEach((item) => {
-      stockDataObj[item.symbol] = item.price;
-    });
-    setStockData(stockDataObj);
   } 
 
-const handlePaginationChange = (direction) => {
-  if (direction === 'next') {
-    if (currentPage < Math.ceil(allSymbols.length / pageSize)) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  } else if (direction === 'prev') {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  }
-};
+  const handleChangePage = (event, newPage) => {
+    setCurrentPage(newPage);  
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
 const handleStockClick = (stock) => {
     console.log('Stock clicked:', stock);
-  setSelectedStock(stock); 
+  setSelectedStock(stock)
+  setSelectedSymbol(stock.symbol)
+   
 };
 
 const handleCloseCard = () => {
   setSelectedStock(null);
 };
 
-
 return (
   <>
+  <div className='mx-auto'>
     <div className="flex flex-col items-center justify-center">
       <LineChart />
-
-      <h1 className="mt-8 mb-4 text-2xl font-bold">Watchlist</h1>
-
+      <h1 className="mt-8 mb-4 text-2xl font-bold">Explore Page</h1>
       <div className="mb-8">
         <div className="flex items-center space-x-4">
           <div className="relative inline-block">
@@ -111,31 +113,24 @@ return (
       <div className="floating-card">
         <h2>{selectedStock.name}</h2>
         <p>{selectedStock.description}</p>
-          <StockCandles symbol={selectedStock.symbol} stockData={stockData} />
+        <StockQuote symbol={selectedStock.symbol} />
+          <Link to={`/dashboard/companyProfile/?symbol=${selectedStock.symbol}`}>
+            <button>Company Profile</button>
+          </Link>
         <button onClick={handleCloseCard}>Close</button>
       </div>
     )}
-
-
-      <div className="pagination-controls">
-        <button
-          className="pagination-button"
-          onClick={() => handlePaginationChange('prev')}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span>
-          Page {currentPage} of {Math.ceil(allSymbols.length / pageSize)}
-        </span>
-        <button
-          className="pagination-button"
-          onClick={() => handlePaginationChange('next')}
-          disabled={currentPage === Math.ceil(allSymbols.length / pageSize)}
-        >
-          Next
-        </button>
-      </div>
+        <div className="pagination-controls">
+          <TablePagination
+            component={"div"}
+            count={(allSymbols.length)}
+            page={currentPage}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </div>
+    </div>
     </div>
     </>
   )

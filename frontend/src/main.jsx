@@ -11,6 +11,7 @@ import Watchlist from "./routes/Watchlist";
 import News from "./routes/News";
 import "./index.css";
 import Index from './routes/Index'
+import CompanyProfile from "./components/CompanyProf";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
           {
             path: "news",
             element: <News />,
+          },
+          {
+            path: 'companyprofile',
+            element: <CompanyProfile />
           },
           {
             index: true,

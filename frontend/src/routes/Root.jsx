@@ -7,6 +7,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import CellTowerIcon from "@mui/icons-material/CellTower";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import Footer from "./Footer";
 
 export default function Root() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -40,7 +41,7 @@ export default function Root() {
 
   return (
     <AuthContext.Provider value={{ sharedState, authToken }}>
-      <div className="w-full bg-bgColor flex-col min-h-screen">
+      <div id="page-content" className="w-full bg-bgColor flex-col min-h-screen">
         <header className="h-32 bg-bgColor">
           <nav className="text-3xl font-bold flex items-center">
             <Dropdown show={dropdownOpen} onToggle={toggleDropdown}>
@@ -96,6 +97,7 @@ export default function Root() {
         <div className="h-full">
           <Outlet />
         </div>
+        <Footer />
       </div>
     </AuthContext.Provider>
   );

@@ -1,5 +1,5 @@
-const baseUrl = import.meta.env.VITE_BASE_URL;
-// const baseUrl = 'localhost:8000'
+// const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = 'localhost:8000'
 export const signup = async (username, password) => {
   const data = await fetch(`http://${baseUrl}/accounts/signup`, {
     method: "POST",
