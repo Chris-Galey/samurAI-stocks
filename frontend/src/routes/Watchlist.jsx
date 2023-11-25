@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import LineChart from "./LineChart";
-import StockCandles from './stockCandles';
-
+// import StockCandles from './stockCandles';
+import StockQuote from './Qoute';
 export default function Watchlist(){
 
   const [watchlist, setWatchlist] = useState([]);
@@ -12,6 +12,7 @@ export default function Watchlist(){
   const [selectedStock, setSelectedStock] = useState(null);
   const pageSize = 10;
   const baseUrl = import.meta.env.VITE_BASE_URL;
+  // const baseUrl = 'localhost:8000'
 
   useEffect(() => {
     fetchAllSymbols();
@@ -110,7 +111,8 @@ export default function Watchlist(){
         <div className="floating-card">
           <h2>{selectedStock.name}</h2>
           <p>{selectedStock.description}</p>
-          <StockCandles symbol={selectedStock.symbol} stockData={stockData} />
+          <StockQuote symbol={selectedStock.symbol} />
+          {/* <StockCandles symbol={selectedStock.symbol} stockData={stockData} /> */}
           <button onClick={handleCloseCard}>Close</button>
         </div>
       )}

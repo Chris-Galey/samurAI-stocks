@@ -41,6 +41,10 @@ const router = createBrowserRouter([
             element: <News />,
           },
           {
+            path: 'companyprofile',
+            element: <CompanyProfile />
+          },
+          {
             index: true,
             element: <Index />,
           },
