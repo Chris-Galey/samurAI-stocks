@@ -1,145 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import LineChart from "./LineChart";
-// import StockCandles from './stockCandles';
-import StockQuote from './Qoute';
-export default function Watchlist(){
+// import TextField from "@mui/material/TextField";
+// import FormControl from "@mui/material/FormControl";
+// import MenuItem from "@mui/material/MenuItem";
+// import InputLabel from "@mui/material/InputLabel";
+// import Select from "@mui/material/Select";
 
-  const [watchlist, setWatchlist] = useState([]);
-  const [newSymbol, setNewSymbol] = useState('');
-  const [stockData, setStockData] = useState({});
-  const [allSymbols, setAllSymbols] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedStock, setSelectedStock] = useState(null);
-  const pageSize = 10;
-  const baseUrl = import.meta.env.VITE_BASE_URL;
-  // const baseUrl = 'localhost:8000'
+import { useEffect, useState } from "react";
+import { getWatchList } from "../api/WatchListApi";
+import { useNavigate } from "react-router-dom";
+export default function Watchlist() {
+  const [watchList, setWatchList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchAllSymbols();
-  }, [localStorage.getItem('token')]);
+    const fetchWatchList = async () => {
+      const data = await getWatchList();
+      setWatchList(data);
+    };
+    fetchWatchList();
+  }, []);
 
-  const fetchAllSymbols = async () => {
-    const response = await fetch(`http://${baseUrl}/watchlist/stocksymbols/`, {
-      headers: {
-        Authorization: `token ${localStorage.getItem('token')}`,
-      },
-  });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data)
-      const symbols = data;
-      setAllSymbols(symbols);
-
-      }
-      const stockDataObj = {};
-      stockPrices.forEach((item) => {
-        stockDataObj[item.symbol] = item.price;
-      });
-      setStockData(stockDataObj);
-    } 
-
-  const handlePaginationChange = (direction) => {
-    if (direction === 'next') {
-      if (currentPage < Math.ceil(allSymbols.length / pageSize)) {
-        setCurrentPage((prevPage) => prevPage + 1);
-      }
-    } else if (direction === 'prev') {
-      if (currentPage > 1) {
-        setCurrentPage((prevPage) => prevPage - 1);
-      }
-    }
+  const navigateToDetails = (ticker) => {
+    navigate(`/dashboard/companyProfile/?symbol=${ticker}`);
   };
-
-  const handleStockClick = (stock) => {
-    console.log('Stock clicked:', stock);
-    setSelectedStock(stock);
-  };
-
-  const handleCloseCard = () => {
-    setSelectedStock(null);
-  };
-
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center">
-        {/* <LineChart /> */}
-  
-        <h1 className="mt-8 mb-4 text-2xl font-bold">Watchlist</h1>
-  
-        <div className="mb-8">
-          <div className="flex items-center space-x-4">
-            <div className="relative inline-block">
-              <input
-                type="text"
-                placeholder="Enter stock symbol"
-                value={newSymbol}
-                onChange={(event) => setNewSymbol(event.target.value)}
-                className="w-full h-8 pl-2 rounded-lg border border-gray-300 focus:outline-none focus:border-gray-500"
-              />
-              <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-            </div>
-          </div>
-          </div>
-        </div>
-  
-        <div className="watchlist-container">
-            {allSymbols.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((stock) => (
-              <div
-                key={stock.symbol}
-                className="watchlist-item"
-                onClick={() => handleStockClick(stock)}
-              >
-                <div className="flex justify-between items-center">
-                  <div className="stock-info flex justify-between">
-                    <span className="stock-symbol">{stock.symbol}</span>
-                  </div>
-                  <div className="stock-details">
-                    <span className="stock-name">{stock.name}</span>
-                    <span className="stock-description text-sm">{stock.description}</span>
-                </div>
-            </div>
-          </div>
-        ))}
+    <div className=" flex flex-col gap-8 p-10 max-h-[80vh] w-full">
+      {/* <div className="flex flex-row min-h-fit place-content-center gap-5">
+        <button
+          className="modern-button"
+          onClick={() => setNewsCategory("all news")}
+        >
+          All News
+        </button>
+        <button
+          className="modern-button"
+          onClick={() => setNewsCategory("top news")}
+        >
+          Top News
+        </button>
+        <button
+          className="modern-button"
+          onClick={() => setNewsCategory("business")}
+        >
+          Business
+        </button>
+        <button
+          className="modern-button"
+          onClick={() => setNewsCategory("technology")}
+        >
+          Tech
+        </button>
       </div>
-
-        {selectedStock && (
-        <div className="floating-card">
-          <h2>{selectedStock.name}</h2>
-          <p>{selectedStock.description}</p>
-          <StockQuote symbol={selectedStock.symbol} />
-          {/* <StockCandles symbol={selectedStock.symbol} stockData={stockData} /> */}
-          <button onClick={handleCloseCard}>Close</button>
-        </div>
-      )}
-
-  
-        <div className="pagination-controls">
-          <button
-            className="pagination-button"
-            onClick={() => handlePaginationChange('prev')}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {Math.ceil(allSymbols.length / pageSize)}
-          </span>
-          <button
-            className="pagination-button"
-            onClick={() => handlePaginationChange('next')}
-            disabled={currentPage === Math.ceil(allSymbols.length / pageSize)}
-          >
-            Next
-          </button>
-        </div>
+      <div className="w-full flex grow-0 place-content-center">
+        <TextField
+          label="Search Headline"
+          id="fullWidth"
+          className="w-1/2"
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+        />
+      </div> */}
+      <div className="flex flex-col grow p-10 overflow-auto">
+        <ul className="flex flex-col gap-5">
+          {watchList.map((stock) => (
+            <li
+              key={stock.id}
+              className="flex flex-row place-items-center max-h-5% gap-10 p-5 rounded-md bg-secondaryColor hover:filter hover:brightness-110"
+              onClick={() => navigateToDetails(stock.ticker)}
+            >
+              <img className="h-20" src={stock.logo} alt="logo" />
+              <div className="flex flex-col flex-auto gap-5 ">
+                <h1 className="text-2xl font-bold">{stock.name}</h1>
+                <h1 className="text-xl">{stock.ticker}</h1>
+                <h1 className="text-xl">{stock.industry}</h1>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-      </>
-    )
+    </div>
+  );
 }
-
-

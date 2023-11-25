@@ -25,10 +25,15 @@ class WatchlistView(ListCreateAPIView):
         user_id = self.request.user.id
         stock = Watchlist.objects.filter(user=user_id)
         serializer = WatchlistSerializer(stock, many=True)
+        if serializer.data == []:
+            return Response({'message': 'No stocks on watchlist'}, status=status.HTTP_200_OK)
+        
         return Response(serializer.data)
 
     def create(self, request):
         data = request.data
+        if data.get('ticker') in [stock.ticker for stock in Watchlist.objects.filter(user=self.request.user.id)]: 
+            return Response({'message': 'Stock already on watchlist'}, status=status.HTTP_200_OK)
         data['user'] = self.request.user.id
         serializer = WatchlistSerializer(data=data)
         if serializer.is_valid():
