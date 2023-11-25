@@ -1,5 +1,4 @@
 const baseUrl = import.meta.env.VITE_BASE_URL;
-console.log(localStorage.getItem("token"));
 
 export const getDetailPrediction = async (symbol) => {
   const data = await fetch(
