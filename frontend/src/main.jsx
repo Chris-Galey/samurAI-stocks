@@ -10,7 +10,6 @@ import Watchlist from "./routes/Watchlist";
 import News from "./routes/News";
 import "./index.css";
 import Index from "./routes/Index";
-import StockDetail from "./routes/StockDetail";
 
 const router = createBrowserRouter([
   {
@@ -44,10 +43,6 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Index />,
-          },
-          {
-            path: "stocks/:symbol",
-            element: <StockDetail />,
           },
         ],
       },
