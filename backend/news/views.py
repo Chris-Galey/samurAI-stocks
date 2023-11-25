@@ -11,7 +11,7 @@ from .serializers import FavoriteArticleSerializer
 
 
 
-finnhub_client = finnhub.Client(api_key='cl23fq1r01qinfqoear0cl23fq1r01qinfqoearg')
+finnhub_client = finnhub.Client(api_key='cl3t4lpr01qj63a9i9h0cl3t4lpr01qj63a9i9hg')
 
 
 @api_view(['GET'])
@@ -48,7 +48,7 @@ def favorite_articles(request):
 
     elif request.method == 'DELETE':
         article_id = request.query_params.get('id')
-        article = FavoriteArticle.objects.filter(id=id, user=request.user)
+        article = FavoriteArticle.objects.filter(id=article_id, user=request.user)
         if article.exists():
             article.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)

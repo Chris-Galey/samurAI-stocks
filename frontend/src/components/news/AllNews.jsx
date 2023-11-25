@@ -1,30 +1,27 @@
 import { useState, useEffect } from "react";
-// import { postFavNews } from "../../api/NewsApi";
-import newsData from "../../news.json";
-
+import { postFavNews } from "../../api/NewsApi";
 export default function AllNews({
   searchTerm,
-  allFavs,
-  updateAllFavs,
+  updatedFavs,
+  updatedNews,
+  postFavs,
   searchCategory,
 }) {
-  const [news, setNews] = useState([]);
   const [favs, setFavs] = useState([]);
-
+  const [news, setNews] = useState([]);
+  console.log(favs, news);
   useEffect(() => {
-    const fetchAllNews = async () => {
-      //   const allNews = await postFavNews();
-      setNews(newsData);
-      setFavs(allFavs);
-    };
-    fetchAllNews();
-  }, [allFavs]);
+    setFavs(updatedFavs);
+    setNews(updatedNews);
+  }, [updatedFavs, updatedNews]);
+
   const handleCheckFavs = (id) => {
-    const favsId = favs.map((fav) => fav.id);
+    const favsId = favs ? favs.map((fav) => fav.news_id) : [];
     return favsId.includes(id);
   };
-  const handleUpdateFavs = async (article) => {
-    updateAllFavs(article);
+  const handlePostFavs = async (article) => {
+    await postFavNews(article);
+    await postFavs();
   };
 
   const filteredNews = news.filter((article) => {
@@ -59,10 +56,10 @@ export default function AllNews({
           <div className="flex flex-col place-content-center">
             <button
               className={` modern-button flex flex-none ${
-                handleCheckFavs(article.id) ? "modern-button:disabled" : ""
+                handleCheckFavs(article.news_id) ? "modern-button:disabled" : ""
               }`}
               disabled={handleCheckFavs(article.id)}
-              onClick={() => handleUpdateFavs(article)}
+              onClick={() => handlePostFavs(article)}
             >
               {handleCheckFavs(article.id) ? "Added" : "Favorite"}
             </button>

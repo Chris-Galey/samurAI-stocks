@@ -26,7 +26,7 @@ export default function Root() {
     signedup,
     setSignedup,
   };
-
+  console.log(sharedState);
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };

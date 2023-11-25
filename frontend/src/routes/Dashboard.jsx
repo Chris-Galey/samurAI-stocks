@@ -1,19 +1,16 @@
-import React, { useState } from "react";
-import { Routes, Route, Link, useLocation, Outlet} from "react-router-dom";
-import LineChart from "./LineChart";
-import { IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import Watchlist from "./Watchlist";
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const location = useLocation();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  return(
+  return (
     <div className="flex flex-row min-h-screen">
       <div
         className={`${
@@ -27,6 +24,7 @@ const Dashboard = () => {
           Close
         </button>
         <h3 className="text-white text-2xl mb-4">Dashboard</h3>
+
           <Link to="/dashboard/explore" className="text-white text-lg mb-2 block">
             Explore
           </Link>
@@ -37,6 +35,7 @@ const Dashboard = () => {
             News
           </Link>
         </div>
+
 
       <div className="flex justify-between items-center bg-primaryColor p-4 shadow-md ">
         <IconButton
