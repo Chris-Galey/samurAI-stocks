@@ -11,6 +11,7 @@ class FavoriteArticle(models.Model):
     summary = models.TextField()
     source = models.CharField(max_length=255, default=0)
     url = models.URLField()
+    image = models.CharField(max_length=255, default=0)
 
 
     def __str__(self):
