@@ -54,6 +54,7 @@ export const postFavNews = async (article) => {
       summary: article.summary,
       source: article.source,
       url: article.url,
+      image: article.image,
     }),
   });
 };

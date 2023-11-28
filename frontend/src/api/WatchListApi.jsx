@@ -37,7 +37,7 @@ export const addToWatchList = async (stock) => {
 };
 
 export const removeFromWatchList = async (id) => {
-  const data = await fetch(`http://${baseUrl}/watchlist?stock_id=${id}`, {
+  const data = await fetch(`http://${baseUrl}/watchlist/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
