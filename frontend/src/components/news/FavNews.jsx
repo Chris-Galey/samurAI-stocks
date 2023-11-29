@@ -25,16 +25,25 @@ export default function FavNews({
     <>
       {filteredNews.map((article) => (
         <li
-          className="flex flex-row  gap-5 p-5 rounded-md bg-secondaryColor"
+          className="flex flex-row place-items-center m-h-5% gap-10 p-5 rounded-md bg-secondaryColor"
           key={article.id}
         >
+          <img className="h-20" src={article.image} alt="logo" />
+
           <div className="flex flex-col flex-auto gap-5 ">
-            <h3>{article.headline}</h3>
+            <h3 className="font-bold">{article.headline}</h3>
+
             <p>
               {article.summary}...
-              <a href={article.url}>Link</a>
+              <a
+                className="underline decoration-green text-green"
+                href={article.url}
+              >
+                Link
+              </a>
             </p>
-            <p>- {article.source}</p>
+            <p className="italic">- {article.source}</p>
+            <p>{new Date(article.datetime * 1000).toLocaleString("en-US")}</p>
           </div>
           <div className="flex flex-col place-content-center">
             <button

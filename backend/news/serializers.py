@@ -6,7 +6,7 @@ class FavoriteArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FavoriteArticle
-        fields = ['id', 'user', 'category', 'datetime', 'headline', 'news_id', 'related', 'summary', 'source', 'url']  
+        fields = ['id', 'user', 'category', 'datetime', 'headline', 'news_id', 'related', 'summary', 'source', 'url', 'image']  
 
     def create(self, validated_data): 
         user = self.context['request'].user

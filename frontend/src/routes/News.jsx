@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
+
 export default function News() {
   const [view, setView] = useState("all");
   const [favs, setFavs] = useState([]);

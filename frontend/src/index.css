@@ -86,12 +86,11 @@
   background-color: #e6e6e6;
 }
 
-
 .watchlist-item .stock-info {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem; 
+  gap: 0.5rem;
 }
 
 .watchlist-item .stock-info .stock-symbol {
@@ -99,14 +98,12 @@
   color: #1ccb94;
 }
 
-
 .watchlist-item .stock-details {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  align-items: flex-end; 
+  align-items: flex-end;
 }
-
 
 .watchlist-item .stock-details .stock-name {
   font-size: 1rem;
@@ -115,10 +112,9 @@
 
 .watchlist-item .stock-details .stock-description {
   padding-left: 20px;
-  font-size: 0.70rem;
+  font-size: 0.7rem;
   color: #888888;
 }
-
 
 .floating-card {
   position: fixed;
@@ -130,9 +126,8 @@
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 999;
-  max-width: 400px; 
+  max-width: 400px;
 }
-
 
 .floating-card h2 {
   color: #333;
@@ -154,8 +149,9 @@
   background-color: #1ccb94;
 }
 
-#footer{
+#footer {
   background-color: rgb(70, 69, 69);
   color: white;
 }
+
 
