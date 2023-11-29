@@ -10,6 +10,13 @@ const Dashboard = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSideBar = () => {
+    if(isSidebarOpen){
+        toggleSidebar()
+    }
+
+  }
+
   return (
     <div className="flex flex-row min-h-screen">
       <div
@@ -25,13 +32,13 @@ const Dashboard = () => {
         </button>
         <h3 className="text-white text-2xl mb-4">Dashboard</h3>
 
-          <Link to="/dashboard/explore" className="text-white text-lg mb-2 block">
+          <Link to="/dashboard/explore" className="text-white text-lg mb-2 block" onClick={closeSideBar}>
             Explore
           </Link>
-          <Link to="/dashboard/watchlist" className="text-white text-lg mb-2 block cursor-pointer">
+          <Link to="/dashboard/watchlist" className="text-white text-lg mb-2 block cursor-pointer" onClick={closeSideBar}>
           Watchlist
           </Link>
-          <Link to="/dashboard/news" className="text-white text-lg mb-2 block">
+          <Link to="/dashboard/news" className="text-white text-lg mb-2 block" onClick={closeSideBar}>
             News
           </Link>
         </div>
