@@ -6,10 +6,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 import pandas as pd
 from prophet import Prophet
+import os
 
 
-API_KEY='4JM9Z5F99ORWEI9T'
-# API_KEY='demo'
+API_KEY=os.getenv("API_APLHA_KEY")
+
 
 
 class StockCSVViewSet(APIView):
