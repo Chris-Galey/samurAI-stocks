@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import os
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView, RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
@@ -56,12 +57,12 @@ class WatchlistRetrieveDestroyView(RetrieveUpdateDestroyAPIView):
 
 #Finnhub API view
 
-# finnhub_client = finnhub.Client(api_key=os.getenv("FINNHUB_API_KEY"))
 
-finnhub_client = finnhub.Client(api_key='cl3t4lpr01qj63a9i9h0cl3t4lpr01qj63a9i9hg')
+FINN_KEY = os.getenv("API_FINN_KEY")
+finnhub_client = finnhub.Client(api_key=FINN_KEY)
 
 class MarketStatusView(APIView):
-    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
+  
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -70,7 +71,7 @@ class MarketStatusView(APIView):
         return JsonResponse(market_status)
 
 class MarketHolidaysView(APIView):
-    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
+    
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -79,7 +80,7 @@ class MarketHolidaysView(APIView):
         return JsonResponse(market_holidays, safe=False)
 
 class StockSymbolsView(APIView):
-    # finnhub_client = finnhub.Client(api_key='cla12j1r01qk1fmlonkgcla12j1r01qk1fmlonl0')
+    
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -137,9 +138,7 @@ class Quote(APIView):
             return JsonResponse(company_quote)
 
 def get_finnhub_api_key(request):
-    # api_key = os.getenv("FINNHUB_API_KEY")
-    # api_key = 'cl23fq1r01qinfqoear0cl23fq1r01qinfqoearg'
-    api_key = 'cl23dr9r01qinfqoe8l0cl23dr9r01qinfqoe8lg'
+    api_key = FINN_KEY
 
     if api_key:
         return JsonResponse({'api_key': api_key})
