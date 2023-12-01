@@ -6,14 +6,15 @@
 version: "3"
 services:
   api:
-    image: $DOCKERHUB_UNAME/backend-prod:$NEW_VERSION
+    image: $DOCKERHUB_UNAME/api-prod:$NEW_VERSION
     environment:
       - SECRET_KEY=$SECRET_KEY
       - DEBUG=$DEBUG
       - DB_NAME=$POSTGRES_DB
       - DB_USER=$POSTGRES_USER
       - DB_PASS=$POSTGRES_PASSWORD
-      - API_KEY=$API_KEY
+      - API_FINN_KEY=$API_FINN_KEY
+      - API_ALPHA_KEY=$API_ALPHA_KEY
     depends_on:
       - db
   nginx:
