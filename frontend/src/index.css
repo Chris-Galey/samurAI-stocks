@@ -56,6 +56,13 @@
   background-color: #f1f5f9;
 }
 
+.navbar .dropdown-menu {
+  flex-direction: column;
+  font-size: x-large;
+  margin-left: auto;
+  background-color: #f1f5f9;
+}
+
 .watchlist-container {
   display: flex;
   flex-direction: column;
@@ -146,3 +153,5 @@
   background-color: rgb(70, 69, 69);
   color: white;
 }
+
+

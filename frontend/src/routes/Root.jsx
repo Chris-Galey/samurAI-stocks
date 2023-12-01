@@ -16,6 +16,9 @@ export default function Root() {
   const [authStatus, setAuthStatus] = useState(false);
   const [authToken, setAuthToken] = useState("");
   const [signedup, setSignedup] = useState(false);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const sharedState = {
     username,
     setUsername,
@@ -39,64 +42,110 @@ export default function Root() {
     localStorage.removeItem("token");
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <AuthContext.Provider value={{ sharedState, authToken }}>
-      <div id="page-content" className="w-full bg-bgColor flex-col min-h-screen">
-        <header className="h-32 bg-bgColor">
-          <nav className="text-3xl font-bold flex items-center">
-            <Dropdown show={dropdownOpen} onToggle={toggleDropdown}>
-              <Dropdown.Toggle
-                className="dropdown-toggle flex items-center"
-                onClick={toggleDropdown}
-              >
-                <span className="ml-2">
-                  Samur<em className="italic">AI</em>{" "}
-                  <span className="font-light">Stock</span>
-                </span>
-                <img className="navLogo" src={myImage} alt="Logo" />
-              </Dropdown.Toggle>
-              <Dropdown.Menu
-                className={`dropdown-menu flex flex-col space-y-2 ${
-                  dropdownOpen ? "block" : "hidden"
-                }`}
-                style={{
-                  border: ".1px",
-                  borderRadius: "10px",
-                  zIndex: 1,
-                }}
-              >
-                <Dropdown.Item as={Link} to="/">
+  <div id="page-content" className="w-full bg-bgColor flex-col min-h-screen">
+    <header className="bg-bgColor px-4">
+      <div className="h-16 flex items-center justify-between">
+        <div className="text-3xl font-bold flex items-center">
+          <span>
+            Samur<em className="italic">AI</em>{" "}
+            <span className="font-light">Stock</span>
+          </span>
+          <img className="navLogo" src={myImage} alt="Logo" />
+        </div>
+
+            {/* Responsive Menu Button */}
+            <button
+              className="lg:hidden"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              ☰
+            </button>
+
+            <nav
+              className={`${
+                menuOpen ? 'flex' : 'hidden lg:flex'
+              } lg:flex items-center space-x-4`}
+            >
+              <Link to="/" className="hover:underline font-bold">
+                Home
+              </Link>
+              <Link to="/dashboard/explore" className="hover:underline font-inter font-bold">
+                Explore
+              </Link>
+              <Link to="/dashboard/news" className="hover:underline font-inter font-bold">
+                News
+              </Link>
+              <Link to="/dashboard" className="hover:underline font-inter font-bold">
+                Personal Dashboard
+              </Link>
+              {sharedState.authStatus && (
+                <button onClick={handleLogout} className="hover:underline font-bold">
+                  Logout
+                </button>
+              )}
+            </nav>
+
+            {sharedState.authStatus && (
+              <div className="ml-4 hidden lg:block">Welcome, {username}</div>
+            )}
+          </div>
+
+
+          {menuOpen && (
+            <div className="lg:hidden">
+              <nav className="flex flex-col space-y-2">
+                <Link to="/" onClick={toggleMenu} className="hover:underline">
                   <HomeIcon />
                   Home
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="dashboard/explore">
+                </Link>
+                <Link
+                  to="/dashboard/explore"
+                  onClick={toggleMenu}
+                  className="hover:underline"
+                >
                   <ExploreIcon />
                   Explore
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/dashboard/news">
+                </Link>
+                <Link
+                  to="/dashboard/news"
+                  onClick={toggleMenu}
+                  className="hover:underline"
+                >
                   <CellTowerIcon />
                   News
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/dashboard">
+                </Link>
+                <Link
+                  to="/dashboard"
+                  onClick={toggleMenu}
+                  className="hover:underline"
+                >
                   <DashboardIcon />
                   Personal Dashboard
-                </Dropdown.Item>
-                {sharedState.authStatus ? (
-                  <>
-                    <Dropdown.Divider />
-                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                  </>
-                ) : null}
-              </Dropdown.Menu>
-            </Dropdown>
-            {sharedState.authStatus ? (
-              <div className="ml-auto">Welcome, {username}</div>
-            ) : null}
-          </nav>
+                </Link>
+                {sharedState.authStatus && (
+                  <button onClick={handleLogout} className="hover:underline">
+                    Logout
+                  </button>
+                )}
+              </nav>
+              {sharedState.authStatus && (
+                <div className="ml-4">Welcome, {username}</div>
+              )}
+            </div>
+          )}
         </header>
+
         <div className="h-full">
           <Outlet />
         </div>
+
         <Footer />
       </div>
     </AuthContext.Provider>

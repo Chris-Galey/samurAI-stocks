@@ -46,4 +46,4 @@ class StockCSVViewSet(APIView):
         else:
            
             return Response({'error': 'Failed to fetch data from Alpha Vantage'}, status=r.status_code)
-    
+   
