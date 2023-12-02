@@ -48,16 +48,19 @@ export default function Root() {
 
   return (
     <AuthContext.Provider value={{ sharedState, authToken }}>
-  <div id="page-content" className="w-full bg-bgColor flex-col min-h-screen">
-    <header className="bg-bgColor px-4">
-      <div className="h-16 flex items-center justify-between">
-        <div className="text-3xl font-bold flex items-center">
-          <span>
-            Samur<em className="italic">AI</em>{" "}
-            <span className="font-light">Stock</span>
-          </span>
-          <img className="navLogo" src={myImage} alt="Logo" />
-        </div>
+      <div
+        id="page-content"
+        className="w-full bg-bgColor flex-col min-h-screen"
+      >
+        <header className="bg-bgColor px-4">
+          <div className="h-16 flex items-center justify-between">
+            <div className="text-3xl font-bold flex items-center">
+              <span>
+                Samur<em className="italic">AI</em>{" "}
+                <span className="font-light">Stock</span>
+              </span>
+              <img className="navLogo" src={myImage} alt="Logo" />
+            </div>
 
             {/* Responsive Menu Button */}
             <button
@@ -70,23 +73,35 @@ export default function Root() {
 
             <nav
               className={`${
-                menuOpen ? 'flex' : 'hidden lg:flex'
+                menuOpen ? "flex" : "hidden lg:flex"
               } lg:flex items-center space-x-4`}
             >
               <Link to="/" className="hover:underline font-bold">
                 Home
               </Link>
-              <Link to="/dashboard/explore" className="hover:underline font-inter font-bold">
+              <Link
+                to="/dashboard/explore"
+                className="hover:underline font-inter font-bold"
+              >
                 Explore
               </Link>
-              <Link to="/dashboard/news" className="hover:underline font-inter font-bold">
+              <Link
+                to="/dashboard/news"
+                className="hover:underline font-inter font-bold"
+              >
                 News
               </Link>
-              <Link to="/dashboard" className="hover:underline font-inter font-bold">
+              <Link
+                to="/dashboard"
+                className="hover:underline font-inter font-bold"
+              >
                 Personal Dashboard
               </Link>
               {sharedState.authStatus && (
-                <button onClick={handleLogout} className="hover:underline font-bold">
+                <button
+                  onClick={handleLogout}
+                  className="hover:underline font-bold"
+                >
                   Logout
                 </button>
               )}
@@ -96,7 +111,6 @@ export default function Root() {
               <div className="ml-4 hidden lg:block">Welcome, {username}</div>
             )}
           </div>
-
 
           {menuOpen && (
             <div className="lg:hidden">

@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { signup } from "../../api/AuthApi";
+
 export default function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +16,7 @@ export default function Signup() {
     setPassword("");
     if (res == 201) {
       sharedState.setSignedup(true);
+
       setLoginError(false);
     } else {
       setLoginError(true);

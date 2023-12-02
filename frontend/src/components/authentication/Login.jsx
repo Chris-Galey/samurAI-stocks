@@ -17,7 +17,7 @@ export default function Login() {
       localStorage.setItem("token", data.token);
       setLoginError(false);
       setPassword("");
-      setUsername("")
+      setUsername("");
       sharedState.setAuthStatus(true);
       sharedState.setAuthToken(data.token);
       sharedState.setUsername(username);
@@ -29,7 +29,10 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form
+      onSubmit={handleFormSubmit}
+      className="flex flex-col place-content-center gap-5 p-10 bg-green/50 w-1/4 min-h-[40vh]"
+    >
       <h2>Sign in</h2>
 
       <input
