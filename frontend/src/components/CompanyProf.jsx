@@ -15,9 +15,11 @@ export default function CompanyProfile() {
   const [currentSymbol, setCurrentSymbol] = useState(
     new URLSearchParams(location.search).get("symbol")
   );
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const fetchApiKey = async () => {
-    const baseUrl = "http://localhost:8000";
-    const response = await fetch(`${baseUrl}/watchlist/get_finnhub_api_key/`);
+    const response = await fetch(
+      `http://${baseUrl}/api/watchlist/get_finnhub_api_key/`
+    );
     const data = await response.json();
 
     if (data.api_key) {
@@ -28,7 +30,7 @@ export default function CompanyProfile() {
   const fetchCompanyData = async () => {
     if (currentSymbol && apiKey) {
       const response = await fetch(
-        `http://localhost:8000/watchlist/companyprofile/?symbol=${currentSymbol}`,
+        `http://${baseUrl}/api/watchlist/companyprofile/?symbol=${currentSymbol}`,
         {
           headers: {
             Authorization: `token ${localStorage.getItem("token")}`,

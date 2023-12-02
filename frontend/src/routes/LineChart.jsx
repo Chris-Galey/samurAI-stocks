@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { ResponsiveLine } from '@nivo/line';
+import React, { useState, useEffect } from "react";
+import { ResponsiveLine } from "@nivo/line";
 
-const popularSymbols = ['AAPL', 'GOOG', 'MSFT', 'AMZN', 'TSLA'];
-
-const LineChart = ({ symbol = 'AAPL' }) => {
+const popularSymbols = ["AAPL", "GOOG", "MSFT", "AMZN", "TSLA"];
+const baseUrl = import.meta.env.VITE_BASE_URL;
+const LineChart = ({ symbol = "AAPL" }) => {
   const [data, setData] = useState([]);
-  const [apiKey, setApiKey] = useState('');
+  const [apiKey, setApiKey] = useState("");
 
-
-  const randomSymbol = popularSymbols[Math.floor(Math.random() * popularSymbols.length)];
+  const randomSymbol =
+    popularSymbols[Math.floor(Math.random() * popularSymbols.length)];
 
   const fetchApiKey = async () => {
     try {
-      const baseUrl = 'http://localhost:8000';
-      const response = await fetch(`${baseUrl}/watchlist/get_finnhub_api_key/`);
+      const response = await fetch(
+        `http://${baseUrl}/api/watchlist/get_finnhub_api_key/`
+      );
       const data = await response.json();
 
       if (data.api_key) {
         setApiKey(data.api_key);
       } else {
-        console.error('Error fetching Finnhub API key');
+        console.error("Error fetching Finnhub API key");
       }
     } catch (error) {
-      console.error('Error fetching Finnhub API key', error);
+      console.error("Error fetching Finnhub API key", error);
     }
   };
 
@@ -50,12 +51,12 @@ const LineChart = ({ symbol = 'AAPL' }) => {
 
       setData([
         {
-          id: 'Stock Price',
+          id: "Stock Price",
           data: stockData,
         },
       ]);
     } catch (error) {
-      console.error('Error fetching stock data', error);
+      console.error("Error fetching stock data", error);
     }
   };
 
@@ -71,25 +72,29 @@ const LineChart = ({ symbol = 'AAPL' }) => {
 
   return (
     <div>
-      <div className='flex justify-center'>
+      <div className="flex justify-center">
         <button onClick={fetchData}>7 day Open/Close for {symbol}!</button>
       </div>
-      <div style={{ width: '600px', height: '400px' }}>
+      <div style={{ width: "600px", height: "400px" }}>
         <ResponsiveLine
           data={data}
           margin={{ top: 10, right: 30, bottom: 50, left: 60 }}
-          xScale={{ type: 'time', format: '%Y-%m-%dT%H:%M:%S.%LZ', useUTC: false }}
+          xScale={{
+            type: "time",
+            format: "%Y-%m-%dT%H:%M:%S.%LZ",
+            useUTC: false,
+          }}
           xFormat="time:%Y-%m-%d %H:%M:%S"
-          yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+          yScale={{ type: "linear", min: "auto", max: "auto" }}
           axisLeft={{
-            legend: 'Price',
+            legend: "Price",
             legendOffset: -40,
           }}
           axisBottom={{
-            format: '%b %d',
+            format: "%b %d",
             tickRotation: -45,
           }}
-          colors={{ scheme: 'set3' }}
+          colors={{ scheme: "set3" }}
           enablePoints={false}
           enableSlices="x"
         />
