@@ -2,7 +2,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const getDetailPrediction = async (symbol) => {
   const data = await fetch(
-    `http://${baseUrl}/alpha_api/csvview?symbol=${symbol}`,
+    `http://${baseUrl}/api/alpha_api/csvview?symbol=${symbol}`,
     {
       method: "GET",
       headers: {

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 
 const StockQuote = ({ symbol }) => {
@@ -8,7 +9,7 @@ const StockQuote = ({ symbol }) => {
     try {
       // const baseUrl = 'http://localhost:8000';
       const baseUrl = import.meta.env.VITE_BASE_URL;
-      const response = await fetch(`${baseUrl}/watchlist/get_finnhub_api_key/`);
+      const response = await fetch(`${baseUrl}/api/watchlist/get_finnhub_api_key/`);
       const data = await response.json();
 
       if (data.api_key) {
