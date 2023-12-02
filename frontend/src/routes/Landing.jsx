@@ -24,7 +24,7 @@ export default function Landing() {
         </p>
       </div>
 
-      <div className="flex flex-row justify-center mt-40">
+      <div className="flex flex-row justify-center mt-40 mb-80">
         <Link to="/auth">
           <button className="modern-button">Register</button>
         </Link>
