@@ -17,7 +17,7 @@ export default function Landing() {
         <p>Where you can learn more about stocks and investing your money like a smart samurai. <br /> <span className="text-center block">Get started today by registering an account.</span></p>        
       </div>
 
-      <div className="flex flex-row justify-center mt-40">
+      <div className="flex flex-row justify-center mt-40 mb-80">
         <Link to="/auth">
           <button className="modern-button">Register</button>
         </Link>
