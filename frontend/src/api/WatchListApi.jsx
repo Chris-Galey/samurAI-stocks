@@ -1,7 +1,7 @@
-const baseUrl = "127.0.0.1:8000";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const getWatchList = async () => {
-  const data = await fetch(`http://${baseUrl}/watchlist`, {
+  const data = await fetch(`http://${baseUrl}/api/watchlist`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const getWatchList = async () => {
 
 export const addToWatchList = async (stock) => {
   try {
-    const data = await fetch(`http://${baseUrl}/watchlist/`, {
+    const data = await fetch(`http://${baseUrl}/api/watchlist/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export const addToWatchList = async (stock) => {
 };
 
 export const removeFromWatchList = async (id) => {
-  const data = await fetch(`http://${baseUrl}/watchlist/${id}`, {
+  const data = await fetch(`http://${baseUrl}/api/watchlist/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

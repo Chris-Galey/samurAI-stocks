@@ -29,7 +29,7 @@ useEffect(() => {
 }, [localStorage.getItem('token')]);
 
 const fetchAllSymbols = async () => {
-    const response = await fetch(`http://${baseUrl}/watchlist/stocksymbols/`, {
+    const response = await fetch(`http://${baseUrl}/api/watchlist/stocksymbols/`, {
     headers: {
       Authorization: `token ${localStorage.getItem('token')}`,
     },

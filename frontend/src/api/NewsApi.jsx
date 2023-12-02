@@ -1,7 +1,7 @@
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const getNews = async () => {
-  const data = await fetch(`http://${baseUrl}/news/get-news`, {
+  const data = await fetch(`http://${baseUrl}/api/news/get-news`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +13,7 @@ export const getNews = async () => {
 };
 
 export const getFavNews = async () => {
-  const data = await fetch(`http://${baseUrl}/news/favorites`, {
+  const data = await fetch(`http://${baseUrl}/api/news/favorites`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const getFavNews = async () => {
 
 export const deleteFavNews = async (id) => {
   console.log(id);
-  const data = await fetch(`http://${baseUrl}/news/favorites/?id=${id}`, {
+  const data = await fetch(`http://${baseUrl}/api/news/favorites/?id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const deleteFavNews = async (id) => {
 
 export const postFavNews = async (article) => {
   console.log(article);
-  const data = await fetch(`http://${baseUrl}/news/favorites/`, {
+  const data = await fetch(`http://${baseUrl}/api/news/favorites/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
