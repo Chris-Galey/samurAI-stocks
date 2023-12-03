@@ -1,21 +1,28 @@
-import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { AuthContext } from "../context/AuthContext";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { sharedState } = useContext(AuthContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!sharedState.authStatus) {
+      navigate("/auth/login");
+    }
+  }, [sharedState.authStatus, navigate]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   const closeSideBar = () => {
-    if(isSidebarOpen){
-        toggleSidebar()
+    if (isSidebarOpen) {
+      toggleSidebar();
     }
-
-  }
+  };
 
   return (
     <div className="flex flex-row min-h-screen">
@@ -32,17 +39,28 @@ const Dashboard = () => {
         </button>
         <h3 className="text-white text-2xl mb-4">Dashboard</h3>
 
-          <Link to="/dashboard/explore" className="text-white text-lg mb-2 block" onClick={closeSideBar}>
-            Explore
-          </Link>
-          <Link to="/dashboard/watchlist" className="text-white text-lg mb-2 block cursor-pointer" onClick={closeSideBar}>
+        <Link
+          to="/dashboard/explore"
+          className="text-white text-lg mb-2 block"
+          onClick={closeSideBar}
+        >
+          Explore
+        </Link>
+        <Link
+          to="/dashboard/watchlist"
+          className="text-white text-lg mb-2 block cursor-pointer"
+          onClick={closeSideBar}
+        >
           Watchlist
-          </Link>
-          <Link to="/dashboard/news" className="text-white text-lg mb-2 block" onClick={closeSideBar}>
-            News
-          </Link>
-        </div>
-
+        </Link>
+        <Link
+          to="/dashboard/news"
+          className="text-white text-lg mb-2 block"
+          onClick={closeSideBar}
+        >
+          News
+        </Link>
+      </div>
 
       <div className="flex justify-between items-center bg-primaryColor p-4 shadow-md ">
         <IconButton

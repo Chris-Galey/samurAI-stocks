@@ -1,7 +1,9 @@
 import myImage from "../assets/samurai.png";
 import { Link } from "react-router-dom";
-
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 export default function Landing() {
+  const { sharedState } = useContext(AuthContext);
   return (
     <>
       <div className="flex flex-row justify-center ">
@@ -23,12 +25,13 @@ export default function Landing() {
           </span>
         </p>
       </div>
-
-      <div className="flex flex-row justify-center mt-40 mb-80">
-        <Link to="/auth">
-          <button className="modern-button">Register</button>
-        </Link>
-      </div>
+      {!sharedState.authState && (
+        <div className="flex flex-row justify-center mt-40 mb-80">
+          <Link to="/auth/signup">
+            <button className="modern-button">Register</button>
+          </Link>
+        </div>
+      )}
     </>
   );
 }

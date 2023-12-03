@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import Signup from "../components/authentication/Signup";
-import Login from "../components/authentication/Login";
+import { Outlet } from "react-router-dom";
 
 export default function Auth() {
-  const { sharedState } = useContext(AuthContext);
-
-  return <>{!sharedState.signedup ? <Signup /> : <Login />}</>;
+  return (
+    <div className="flex place-content-center">
+      <Outlet />
+    </div>
+  );
 }

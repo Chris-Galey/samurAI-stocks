@@ -8,8 +8,10 @@ import Dashboard from "./routes/Dashboard";
 import Explore from "./routes/Explore";
 import Watchlist from "./routes/Watchlist";
 import News from "./routes/News";
+import Login from "./components/authentication/Login";
+import Signup from "./components/authentication/Signup";
 import "./index.css";
-import Index from "./routes/Index";
+
 import CompanyProfile from "./components/CompanyProf";
 const router = createBrowserRouter([
   {
@@ -23,6 +25,16 @@ const router = createBrowserRouter([
       {
         path: "auth",
         element: <Auth />,
+        children: [
+          {
+            path: "login",
+            element: <Login />,
+          },
+          {
+            path: "signup",
+            element: <Signup />,
+          },
+        ],
       },
       {
         path: "dashboard",
@@ -43,10 +55,6 @@ const router = createBrowserRouter([
           {
             path: "companyprofile",
             element: <CompanyProfile />,
-          },
-          {
-            index: true,
-            element: <Index />,
           },
         ],
       },
