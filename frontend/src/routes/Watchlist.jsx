@@ -17,7 +17,6 @@ export default function Watchlist() {
   }, [watchList]);
 
   const handleDeleteArticle = async (id) => {
-    console.log(id);
     await removeFromWatchList(id);
     const updatedWatchList = watchList.filter((stock) => stock.id !== id);
     setWatchList(updatedWatchList);
