@@ -24,7 +24,6 @@ export const getFavNews = async () => {
 };
 
 export const deleteFavNews = async (id) => {
-  console.log(id);
   const data = await fetch(`http://${baseUrl}/api/news/favorites/?id=${id}`, {
     method: "DELETE",
     headers: {
@@ -37,7 +36,6 @@ export const deleteFavNews = async (id) => {
 };
 
 export const postFavNews = async (article) => {
-  console.log(article);
   const data = await fetch(`http://${baseUrl}/api/news/favorites/`, {
     method: "POST",
     headers: {

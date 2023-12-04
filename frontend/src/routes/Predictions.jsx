@@ -1,53 +1,3 @@
-// import React, { useState, useEffect } from "react";
-
-// const Predictions = ({ symbol }) => {
-//   const [data, setData] = useState([]);
-
-//   const fetchPredictions = async () => {
-//     try {
-//       // Assuming fetchStockData is a separate function that you use to fetch stock data
-//       await fetchStockData();
-
-//       const today = new Date();
-//       const thirtyDaysFromNow = new Date(today);
-//       thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
-
-//       const todayTimestamp = Math.floor(today.getTime() / 1000);
-//       const thirtyDaysFromNowTimestamp = Math.floor(thirtyDaysFromNow.getTime() / 1000);
-
-//       const forecastResponse = await fetch(
-//         `http://localhost:8000/alpha_api/csvview/?symbol=${symbol}&start_date=${todayTimestamp}&end_date=${thirtyDaysFromNowTimestamp}`
-//       );
-//       const forecastData = await forecastResponse.json();
-
-//       const forecast = forecastData.forecast.map((dataPoint) => ({
-//         x: new Date(dataPoint.ds),
-//         y: dataPoint.yhat,
-//       }));
-
-//       setData([
-//         {
-//           id: '30-Day Forecast',
-//           data: forecast,
-//         },
-//       ]);
-//     } catch (error) {
-//       console.error('Error fetching predictions data', error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchPredictions();
-//   }, [symbol]);
-
-//   return (
-//     <div>
-//       {/* Render your predictions data here using the 'data' state */}
-//     </div>
-//   );
-// };
-
-// export default Predictions;
 import { getDetailPrediction } from "../api/PredictionApi.jsx";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -64,7 +14,6 @@ import { sampleData } from "../assets/prophet.js";
 export default function Predictions() {
   const [pred, setPred] = useState([]);
   const { symbol } = useParams();
-  console.log(pred);
   const parseDate = (date) => {
     const originalDate = new Date(date);
 
@@ -75,8 +24,9 @@ export default function Predictions() {
   };
   useEffect(() => {
     const fetchPredictions = async () => {
-      // const data = await getDetailPrediction(symbol);
-      const data = sampleData;
+      const data = await getDetailPrediction(symbol);
+
+      // const data = sampleData;
       const lastThirtyDays = data.forecast.slice(-30);
       const cleanedData = lastThirtyDays.map((dataPoint) => ({
         date: parseDate(dataPoint.ds),
@@ -130,7 +80,7 @@ export default function Predictions() {
             </linearGradient>
           </defs>
           <XAxis dataKey="date" />
-          <YAxis domain={["dataMin - 20", "dataMax + 20"]} />
+          <YAxis domain={["dataMin", "dataMax"]} />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
 

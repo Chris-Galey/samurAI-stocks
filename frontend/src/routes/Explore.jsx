@@ -37,7 +37,7 @@ export default function Explore() {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+
       const symbols = data;
       setAllSymbols(symbols);
       setCachedSymbols(symbols);
@@ -53,7 +53,6 @@ export default function Explore() {
   };
 
   const handleStockClick = (stock) => {
-    console.log("Stock clicked:", stock);
     setSelectedStock(stock);
     setSelectedSymbol(stock.symbol);
   };
