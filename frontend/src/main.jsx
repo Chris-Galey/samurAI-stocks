@@ -10,9 +10,11 @@ import Watchlist from "./routes/Watchlist";
 import News from "./routes/News";
 import Login from "./components/authentication/Login";
 import Signup from "./components/authentication/Signup";
+import Predictions from "./routes/Predictions";
 import "./index.css";
 
 import CompanyProfile from "./components/CompanyProf";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -55,6 +57,10 @@ const router = createBrowserRouter([
           {
             path: "companyprofile",
             element: <CompanyProfile />,
+          },
+          {
+            path: "predictions/:symbol",
+            element: <Predictions />,
           },
         ],
       },

@@ -132,6 +132,9 @@ export default function Explore() {
               >
                 <button>Company Profile</button>
               </Link>
+              <Link to={`/dashboard/predictions/${selectedStock.symbol}`}>
+                <button>Predictions</button>
+              </Link>
               <button onClick={handleCloseCard}>Close</button>
             </div>
           )}
