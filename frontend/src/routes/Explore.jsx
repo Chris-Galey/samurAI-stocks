@@ -61,6 +61,15 @@ export default function Explore() {
     setSelectedStock(null);
   };
 
+  const handleSearch = () => {
+    const filteredSymbols = cachedSymbols.filter((stock) =>
+      stock.symbol.toLowerCase().includes(newSymbol.toLowerCase())
+    );
+
+    setAllSymbols(filteredSymbols);
+    setCurrentPage(1);
+  };
+
   return (
     <>
       <div className="mx-auto">
@@ -68,34 +77,40 @@ export default function Explore() {
           <LineChart />
           <h1 className="mt-8 mb-4 text-2xl font-bold">Explore Page</h1>
           <div className="mb-8">
-            <div className="flex items-center space-x-4">
-              <div className="relative inline-block">
-                <input
-                  type="text"
-                  placeholder="Enter stock symbol"
-                  value={newSymbol}
-                  onChange={(event) => setNewSymbol(event.target.value)}
-                  className="w-full h-8 pl-2 rounded-lg border border-gray-300 focus:outline-none focus:border-gray-500"
+        <div className="flex items-center space-x-4">
+          <div className="relative inline-block">
+            <input
+              type="text"
+              placeholder="Enter stock symbol"
+              value={newSymbol}
+              onChange={(event) => setNewSymbol(event.target.value)}
+              className="w-full h-8 pl-2 rounded-lg border border-gray-300 focus:outline-none focus:border-gray-500"
+            />
+            <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+              <svg
+                className="w-5 h-5 text-gray-700"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                  <svg
-                    className="w-5 h-5 text-gray-700"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </div>
-              </div>
+              </svg>
             </div>
           </div>
+          <button
+            onClick={handleSearch}
+            className="px-4 py-2 text-white bg-blue-500 rounded-md"
+          >
+            Search
+          </button>
+        </div>
+      </div>
 
           <div className="watchlist-container w-full">
             {allSymbols

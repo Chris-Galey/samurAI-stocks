@@ -30,7 +30,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col place-items-center gap-5 p-10  w-1/4 min-h-[40vh]">
+    <div className="flex flex-col place-items-center gap-5 p-10 w-1/4 h-screen">
       <h2>Sign in</h2>
       <form
         onSubmit={handleFormSubmit}

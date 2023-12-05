@@ -27,7 +27,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex flex-col place-items-center gap-5 p-10 w-1/4 min-h-[40vh]">
+    <div className="flex flex-col place-items-center gap-5 p-10 w-1/4 min-h-[40vh] h-screen">
       <h2>Register a new account</h2>
       <form
         onSubmit={handleFormSubmit}
