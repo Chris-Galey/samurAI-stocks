@@ -15,9 +15,6 @@ const Footer = () => {
           <img className="navLogo mr-2" src={myImage} alt="Logo" />
         </div>
         <div className="flex space-x-4">
-          <a href="/about" className="hover:text-blue-500">
-            About
-          </a>
           <a href="mailto:samuraistock@outlook.com" className="hover:text-blue-500">
             Contact us
           </a>
