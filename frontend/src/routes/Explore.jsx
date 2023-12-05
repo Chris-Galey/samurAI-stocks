@@ -122,19 +122,21 @@ export default function Explore() {
           </div>
 
           {selectedStock && (
-            <div className="floating-card">
+            <div className=" flex flex-col gap-2 floating-card">
               <h2>{selectedStock.name}</h2>
               <p>{selectedStock.description}</p>
               <StockQuote symbol={selectedStock.symbol} />
-              <Link
-                to={`/dashboard/companyProfile/?symbol=${selectedStock.symbol}`}
-              >
-                <button>Company Profile</button>
-              </Link>
-              <Link to={`/dashboard/predictions/${selectedStock.symbol}`}>
-                <button>Predictions</button>
-              </Link>
-              <button onClick={handleCloseCard}>Close</button>
+              <div className="flex flex-row gap-2">
+                <Link
+                  to={`/dashboard/companyProfile/?symbol=${selectedStock.symbol}`}
+                >
+                  <button>Company Profile</button>
+                </Link>
+                <Link to={`/dashboard/predictions/${selectedStock.symbol}`}>
+                  <button>Predictions</button>
+                </Link>
+                <button onClick={handleCloseCard}>Close</button>
+              </div>
             </div>
           )}
           <div className="pagination-controls">

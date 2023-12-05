@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import LineChart from "../routes/LineChart";
@@ -76,7 +75,7 @@ export default function CompanyProfile() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="flex flex-col gap-2 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <Link to={"/dashboard/explore/"}>
         <Button variant="outlined" startIcon={<KeyboardReturnIcon />}>
           Go back
@@ -107,7 +106,7 @@ export default function CompanyProfile() {
           alt="Company Logo"
         />
       )}
-      <div className="text-lg">
+      <div className="flex flex-col text-lg">
         <p className="mb-2 text-center">
           <strong>Symbol:</strong> {companyProfile.ticker || "Not Available"}
         </p>
@@ -124,14 +123,18 @@ export default function CompanyProfile() {
         </p>
       </div>
 
-      <Button
-        onClick={handleAddToWatchList}
-        variant="outlined"
-        startIcon={<AddchartIcon />}
-      >
-        Add!
-      </Button>
-      {addStatus && <p>{addStatus}</p>}
+      <div className="flex flex-row gap-2 place-items-center">
+        <Link onClick={handleAddToWatchList} className="modern-button">
+          Add to Watchlist
+        </Link>
+        <Link
+          to={`../predictions/${companyProfile.ticker}`}
+          className="modern-button ml-2"
+        >
+          Predictions
+        </Link>
+        {addStatus && <p>{addStatus}</p>}
+      </div>
     </div>
   );
 }

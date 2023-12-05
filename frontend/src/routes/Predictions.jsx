@@ -1,6 +1,6 @@
 import { getDetailPrediction } from "../api/PredictionApi.jsx";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   XAxis,
   YAxis,
@@ -44,28 +44,6 @@ export default function Predictions() {
     <div className=" flex flex-col place-items-center w-full gap-10">
       <h1>${symbol} 30 Day Predictions</h1>
 
-      {/* <LineChart width={700} height={500} data={pred}>
-        <Line type="monotone" dataKey="price" stroke="#0050FC" />
-        <Line type="monotone" dataKey="high" stroke="#0050FC" />
-        <Line type="linear" dataKey="low" stroke="#0050FC" />
-
-        <Legend verticalAlign="top" height={36} />
-
-        <XAxis
-          dataKey="date"
-          domain={["dataMin", "dataMax"]}
-          angle={-45}
-          textAnchor="end"
-          tickCount={30}
-        />
-        <YAxis
-          dataKey="price"
-          domain={["dataMin - 20", "dataMax - 20"]}
-          tickCount={30}
-        />
-        <Area type="monotone" dataKey="high" stroke="#0050FC" fill="#B5DFFF" />
-        <Area type="monotone" dataKey="low" stroke="#0050FC" fill="#ccc" />
-      </LineChart> */}
       <div className=" flex place-content-center w-1/2 h-1/2">
         <AreaChart
           width={500}
@@ -92,6 +70,18 @@ export default function Predictions() {
             fill="url(#price)"
           />
         </AreaChart>
+      </div>
+      <div className="flex flex-row gap-5">
+        <Link to={"/dashboard/explore/"} className="modern-button">
+          {" "}
+          Explore{" "}
+        </Link>
+        <Link
+          to={`/dashboard/companyProfile/?symbol=${symbol}`}
+          className="modern-button"
+        >
+          Company Profile
+        </Link>
       </div>
     </div>
   );
