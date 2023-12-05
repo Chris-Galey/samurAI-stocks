@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 const StockQuote = ({ symbol }) => {
   const [quote, setQuote] = useState(null);
   const [apiKey, setApiKey] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchApiKey = async () => {
     try {
@@ -41,7 +42,7 @@ const StockQuote = ({ symbol }) => {
       }
     } catch (error) {
       console.error('Error fetching stock data:', error);
-    }
+    } 
   };
 
   useEffect(() => {
@@ -49,10 +50,30 @@ const StockQuote = ({ symbol }) => {
   }, []);
 
   useEffect(() => {
-    if (apiKey) {
-      fetchStockData();
-    }
+    setQuote(null)
+    setIsLoading(true);
+    // console.log(isLoading)
+    const fetchData = async () => {
+      try{
+        if (apiKey) {
+        await fetchStockData();
+        }
+      } finally {
+      setIsLoading(false);
+      // console.log(isLoading)
+      }
+    };
+    fetchData();
   }, [symbol, apiKey]);
+
+  if (isLoading) {
+    return (
+      <div>
+        {/* <p className="text-4xl">⊹⋛⋋( ՞ਊ ՞)⋌⋚⊹</p> */}
+        <p className="text-4xl">Loading...</p>
+      </div>
+    );
+  }
 
   if (!quote) {
     return <div>No data available for the specified symbol.</div>;
@@ -60,6 +81,8 @@ const StockQuote = ({ symbol }) => {
 
   return (
     <div className="stock-quote">
+      {/* <div className="loading">{isLoading ? <p>Loading....</p> : null}</div> */}
+      {/* {isLoading && <p>Loading....</p>} */}
       <div className="current-price">Current Price: {quote.c}</div>
       <div className="previous-close">Previous Close: {quote.pc}</div>
       <div className="open">Open: {quote.o}</div>
