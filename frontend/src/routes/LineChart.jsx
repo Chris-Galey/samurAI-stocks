@@ -3,6 +3,7 @@ import { ResponsiveLine } from "@nivo/line";
 
 const popularSymbols = ["AAPL", "GOOG", "MSFT", "AMZN", "TSLA"];
 const baseUrl = import.meta.env.VITE_BASE_URL;
+
 const LineChart = ({ symbol = "AAPL" }) => {
   const [data, setData] = useState([]);
   const [apiKey, setApiKey] = useState("");

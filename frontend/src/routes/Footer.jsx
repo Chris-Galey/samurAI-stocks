@@ -5,7 +5,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 const Footer = () => {
   return (
     <footer id="footer" className="bg-gray-800 text-white py-8">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center h-full">
         <div className="flex items-center">
           <span className="text-xl font-semibold">
             Samur
@@ -15,11 +15,8 @@ const Footer = () => {
           <img className="navLogo mr-2" src={myImage} alt="Logo" />
         </div>
         <div className="flex space-x-4">
-          <a href="#about" className="hover:text-blue-500">
-            About
-          </a>
-          <a href="#contact" className="hover:text-blue-500">
-            Contact
+          <a href="mailto:samuraistock@outlook.com" className="hover:text-blue-500">
+            Contact us
           </a>
         </div>
         <div className="flex space-x-4">
